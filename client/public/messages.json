@@ -1,0 +1,168 @@
+{
+    "main": {
+        "name": "Hossein Torabi",
+        "occupation": "Software Developer",
+        "description": "I believe in the power of people collaborating in making the future; whether it's a company, product or a nation.",
+        "image": "profilepic.jpg",
+        "bio1": "I am a highly motivated and accomplished CS professional with skills and experience in software development, user experience, database management and motion graphics. I work with a team of user experience and visual designers to create the next generation of IBM Business Analytics software.",
+        "bio2": "As a software developer, I liaise with the management and the design teams while distributing tasks among junior developers and supervising them to assure design details are implemented correctly using best practices and meeting the design vision.",
+        "contactmessage": "Please feel free to leave me a message and I will reply as soon as possible",
+        "email": "h_tbi@yahoo.com",
+        "phone": "555-555-5555",
+        "address": {
+            "street": "(Street Name)",
+            "city": "Toronto",
+            "country": "Canada",
+            "postalCode": "(Postal Code)"
+        },
+        "website": "http://www.hosseintorabi.com",
+        "resumedownload": "/documents/Hossein_Torabi_Resume.pdf",
+        "social": [
+            {
+                "name": "linkedin",
+                "url": "https://ca.linkedin.com/in/hosseintorabi/",
+                "className": "fa fa-linkedin"
+            }
+        ]
+    },
+    "resume": {
+        "skillmessage": "In addition to several programming languages such as Java, C++ and python, I have skills and experience in the following areas:",
+        "education": [
+            {
+                "school": "University Of Toronto - Canada",
+                "degree": "Master of Information Systems and Design",
+                "graduated": "Year",
+                "description": "Major courses: Project Management, Data Analytics, System Requirements and Architectural Design, Information Architecture"
+            },
+            {
+                "school": "York University - Canada",
+                "degree": "BA Computer Science (Honours)",
+                "graduated": "Year",
+                "description": "Major courses: Building E-Commerce Systems, Mobile User Interfaces, Database Management Systems, Design and Analysis of Algorithms, Fundamentals of Data Structures"
+            },
+            {
+                "school": "Central Queensland University - Australia",
+                "degree": "Bachelor of Information Technology (Network Services)",
+                "graduated": "Year",
+                "description": "Major courses: Operating Systems, Networks, Systems Administration, Human-Computer Interaction, Database Application Development, Business Intelligence and Knowledge Management"
+            }
+        ],
+        "work": [
+            {
+                "company": "IBM Canada",
+                "title": "Software Developer",
+                "years": "2015 - Present",
+                "description": "Currently I am the front-end mobile team lead for the new Cognos Analytics mobile app. My responsibilities include production, modification, and maintenance of application user interfaces by bringing designers’ concepts to life and maintaining software workflow management. I have also a member of the development team who created and maintained a modular, scalable and customizable cross-portfolio design toolkit using React framework. The toolkit has been adopted by IBM Cognos Analytics and has significantly enhanced UI performance ensuring the consistency and maintainability of the product."
+            },
+            {
+                "company": "IBM Canada",
+                "title": "DB2 Quality Assurance Development Intern",
+                "years": "2013 - 2014",
+                "description": "As a member of IBM's worldwide database management system (DB2) Quality Assurance team, I worked on the latest DB2 features by designing, developing and executing test scenarios within a highly automated environment. In my capstone project for my undergraduate studies I Created a new query rewrite rule for optimizing queries with nested CASE expressions in DB2.",
+                "link": "/documents/db2QueryOptimization.pdf"
+            },
+            {
+                "company": "Ontario Ministry of Environment",
+                "title": "Database Developer",
+                "years": "2010 - 2011",
+                "description": "I was responsible for data analysis and integrating business systems, developing database applications and architecting new solutions to support clients’ requirements. Created a Risk Assessment System to calculate the risk score and identify high, medium and low risk sectors based on selected region, time period and environmental risk factors Created an Asset, Training and Equipment Control application (ATEC) and integrated it with other business systems to track field equipment inventories and employees’ trainings."
+            },
+            {
+                "company": "J.M Kelly Group, Australia",
+                "title": "Junior IT Developer",
+                "years": "2009 - 2010",
+                "description": "I worked at the largest privately owned construction group in Australia as a junior IT developer having various responsibilities including: application development (web-based and conventional), database management and helpdesk technical support. Created an internal flight scheduling and booking application for the private airline of J.M Kelly Group. Assisted senior IT developers in performing data normalization and migration for existing databases from Access and MySQL to SQL Server which enhanced and integrated the business systems."
+            }
+        ],
+        "skills": [
+            {
+                "name": "ReactJs",
+                "level": "100%"
+            },
+            {
+                "name": "React Native",
+                "level": "100%"
+            },
+            {
+                "name": "JavaScript",
+                "level": "95%"
+            },
+            {
+                "name": "Express.js",
+                "level": "80%"
+            },
+            {
+                "name": "HTML, CSS, SASS",
+                "level": "100%"
+            },
+            {
+                "name": "Java",
+                "level": "90%"
+            },
+            {
+                "name": "C/C++",
+                "level": "80%"
+            },
+            {
+                "name": "Python",
+                "level": "85%"
+            }
+        ]
+    },
+    "portfolio": {
+        "projects": [
+            {
+                "title": "Cognos Analytics Mobile App",
+                "description": "Worked as the front-end tech lead on Cognos Analytics mobile app using React Native. The app provides a toolset for reporting, analytics, scorecarding, and monitoring of events and metrics",
+                "image": "cognos-analytics.jpg"
+            },
+            {
+                "title": "Contact tracing iOS application",
+                "description": "I participated in the IBM Call for Code global challenge by creating an iOS app using SwiftUI that notifies users if they came in contact with someone who has been tested positive for COVID-19 (June 2020). ",
+                "image": "mesh.jpg",
+                "videoLink": "https://www.youtube.com/embed/2gp8q2CBjI0",
+                "url": "https:youtu.be/yXUU2Mtraao"
+            },
+            {
+                "title": "IBM Business Analytics UI Toolkit",
+                "description": "I worked actively with the other members of the business analytics team to create a new UI toolkit that can be used in various products and primarily in IBM Cognos Analytics application. Our cross-portfolio design toolkit is modular, scalable, extendable and customizable based on business requirements and IBM design patterns. Each widget comes with an interactive demo, table of props and design specs and is tested using unit test scripts to ensure expected functionality and error handling criteria are met.",
+                "image": "ibm-ui-toolkit.jpg"
+            },
+            {
+                "title": "SQL Query Processing Optimization in DB2",
+                "description": "I worked on a joint project between IBM and York University and created a new rewrite rule to optimize queries with nested CASE expressions. On a 2 Billion row table with 50 CASE expressions that had on average 3 levels of nesting, the flattened CASE expressions improved the performance by 5X from ~2500s to ~500s.",
+                "image": "db2QueryOptimization.jpg",
+                "url": "/documents/db2QueryOptimization.pdf"
+            },
+            {
+                "title": "Bubble Chart",
+                "description": "An interactive prototype for IBM Watson Analytics visualization tool. Legend filtering and coordinates display are supported.",
+                "image": "bubblechart.jpg",
+                "url": "/documents/bubbleChart8/bubbleChart8.html"
+            },
+            {
+                "title": "Android App: A Comparative Evaluation",
+                "description": "Created and android app for York university phone and email directory. Then, a user study was conducted to compare the performance of the new app with the one created by York University. It was revealed that searching through the new interface was 15% faster than the existing one. Furthermore, the mean number of interactions required to complete a given search through the new interface was 39% less than the one with the existing interface",
+                "image": "comparativeevaluation.jpg",
+                "url": "/documents/comperativeEvaluation.pdf"
+            },
+            {
+                "title": "IBM Insight Cloud Services",
+                "description": "Created a UI for IBM Insight Cloud Services to ingest and access data, across domains, at scale and speed. As a utility for multiple IBM teams.",
+                "image": "insightcloud.jpg"
+            }
+        ]
+    },
+    "testimonials": {
+        "testimonials": [
+            {
+                "text": "Hossein's innovative ideas and suggestions were key in helping us put together a web based assets management tracking tool which worked so successfully for our Branch that it was recommended that the entire Ministry adopt his tracking program for use.",
+                "user": "Kevin Ng, Ontario Ministry of Environment"
+            },
+            {
+                "text": "Hossein took Advanced Algorithms from me receiving an A. This course is really hard. It requires during each of 5 tests and an exam to completely design new algorithms. Hossein did so exceptionally well and supported both the other students and myself by engaging us all in interesting discussions. I am conﬁdent that he will excel at anything he does.",
+                "user": "Professor Jeﬀ Edmonds, York University"
+            }
+        ]
+    }
+}

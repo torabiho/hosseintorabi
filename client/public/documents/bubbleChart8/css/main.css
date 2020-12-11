@@ -1,0 +1,79 @@
+.chartFrame
+{
+    border-top: 0px !important;
+    border-right: 1px solid #e6e7e8 !important;
+}
+
+.chartVLines
+{
+	border-top: 0px !important;
+	border-bottom: 0px !important;
+}
+
+.chartHLines
+{
+	border-left: 0px !important;
+	border-right: 0px !important;
+}
+
+.vDottedLine
+{
+	border-top: 0px !important;
+	border-bottom: 0px !important;
+	border-right: 0px !important;
+	z-index: 9999 !important;
+}
+
+.hDottedLine
+{
+	border-left: 0px !important;
+	border-bottom: 0px !important;
+	border-right: 0px !important;
+	z-index: 9999 !important;
+}
+
+.bubbles10
+{
+	z-index: 10 !important;
+}
+
+
+/*****************************************/
+
+.ghost-select {
+  display: none;
+  z-index: 9000;
+  position: absolute !important;
+  cursor: default !important;
+}
+
+#big-ghost{
+  /*selected area */
+  border:1px solid #aaf81a;
+  position:absolute;
+}
+
+.ghost-select > div {
+  position: absolute;
+  left: 0px !important;
+  top: 2px !important;
+}
+
+.ghost-active {
+  display: block !important;
+  z-index: -1;
+}
+
+.ghost-select > span {
+  /*area being selected */
+  border: 2px dashed #3898cc;
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+#grid {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
