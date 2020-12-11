@@ -19,6 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+
 app.use('/api/educations',education);
 app.use('/api/bios',bio);
 app.use('/api/skills',skill);
@@ -26,6 +30,11 @@ app.use('/api/projects',project);
 app.use('/api/testimonials',testimonial);
 app.use('/api/works',work);
 app.use('/api', all);
+
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 mongoose.connect(dbConnectionInfo.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
