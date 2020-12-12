@@ -10,7 +10,9 @@
     "build": "babel server --out-dir dist --source-maps inline --copy-files",
     "start": "npm run build && node dist",
     "restart": "rimraf dist && npm run start",
-    "dev": "nodemon --exec npm run restart",
+    "dev:client": "cd client && npm run start",
+    "dev:server": "nodemon --exec npm run restart",
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -33,7 +33,9 @@ app.use('/api/works',work);
 app.use('/api', all);
 
 // All remaining requests return the React app, so it can handle routing.
-app.use('*', express.static(path.join(__dirname, "client", "build")))
+app.get('*', function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 mongoose.connect(dbConnectionInfo.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
