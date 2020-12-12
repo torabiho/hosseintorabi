@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// Priority serve any static files.
+// Priority serve any static files
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 
