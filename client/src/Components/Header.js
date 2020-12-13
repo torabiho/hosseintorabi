@@ -1,24 +1,6 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
-   componentDidMount() {
-      // const links = document.querySelectorAll(".smoothscroll");
-      // console.log("hhhhhh");
- 
-      // for (const link of links) {
-      //    link.addEventListener("click", clickHandler);
-      // }
- 
-      // function clickHandler(e) {
-      //    e.preventDefault();
-      //    const href = this.getAttribute("href");
-      
-      //    document.querySelector(href).scrollIntoView({
-      //       behavior: "smooth"
-      //    });
-      // }
-   }
-
   render() {
     if(this.props.data){
       var bio = this.props.data[0];
