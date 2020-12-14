@@ -364,6 +364,11 @@ call-to-action .button {
 	color: #fff;
 	background-color: #11ABB0;
 }
+#contact .submit-wrapper {
+   display: flex;
+   align-items: center;
+}
+
 #contact button.submit {
 	text-transform: uppercase;
 	letter-spacing: 3px;
@@ -373,7 +378,8 @@ call-to-action .button {
    cursor: pointer;
    height: auto;
    display: inline-block;
-	border-radius: 3px;
+   border-radius: 3px;
+   margin-bottom: 0;
    margin-left: 26%;
 }
 #contact button.submit:hover {
@@ -385,7 +391,6 @@ call-to-action .button {
 	font-size: 13px;
 }
 #message-warning, #message-success {
-   display: none;
 	background: #0F0F0F;
 	padding: 24px 24px;
 	margin-bottom: 36px;
@@ -400,12 +405,9 @@ call-to-action .button {
    margin-right: 10px;
 }
 #image-loader {
-   display: none;
    position: relative;
    left: 18px;
-   top: 17px;
 }
-
 
 /* Twitter Feed */
 #twitter {

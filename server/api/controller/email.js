@@ -2,7 +2,7 @@ import nodeMailer from "nodemailer";
 import { emailInfo } from "../../../config";
 
 exports.send_email = function (req, res) {
-    let transporter = nodeMailer.createTransport({
+    const transporter = nodeMailer.createTransport({
         host: emailInfo.host,
         port: emailInfo.port,
         auth: {
@@ -10,10 +10,14 @@ exports.send_email = function (req, res) {
             pass: emailInfo.senderPass
         }
     });
-    let mailOptions = {
+
+    const mailOptions = {
+        from: req.body.email,
         to: emailInfo.recipient,
         subject: req.body.subject,
-        text: req.body.message
+        html: `<p>Name: ${req.body.name}</p>
+                <p>Email: ${req.body.email}</p>
+                <p>Message: ${req.body.message}</p>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
