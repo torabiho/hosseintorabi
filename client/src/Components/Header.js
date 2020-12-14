@@ -17,7 +17,7 @@ const Header = props => {
    
    const getHeaderInfo = bio =>{
       return <>
-            <h1 className="responsive-headline">I'm {bio.name}.</h1>
+            <h1 className="banner__header">I'm {bio.name}.</h1>
             <h3>I'm a {bio.address.city} based <span>{bio.occupation}</span>. {bio.description}.</h3>
             <hr />
             <ul className="social">

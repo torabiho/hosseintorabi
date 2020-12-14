@@ -1,6 +1,6 @@
 header {
    position: relative;
-   height: 800px;
+   height: 100vh;
    min-height: 500px;
    width: 100%;
    background: #161415 url(../images/header-background.jpg) no-repeat top center;
@@ -152,3 +152,36 @@ ul#nav li a {
 
 ul#nav li a:active { background-color: transparent !important; }
 ul#nav li a.current { color: #F06000; }
+
+
+@media screen and (max-width: 1024px) {
+   header {
+      .banner {
+         .banner__header{
+            font-size: 50px;
+         }
+      }
+   }
+}
+
+
+
+@media screen and (max-width: 767px) {
+   header {
+      .banner {
+         .banner__header{
+            font-size: 40px;
+         }
+      }
+   }
+}
+
+@media screen and (max-width: 480px) {
+   header {
+      .banner {
+         .banner__header{
+            font-size: 35px;
+         }
+      }
+   }
+}
