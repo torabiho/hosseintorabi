@@ -6,7 +6,7 @@ const getMedia = (project) => {
     return (
       <iframe
         title="Contact Tracing App"
-        style={{ minHeight: "184px" }}
+        style={{ minHeight: "227px" }}
         src={project.videoLink}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -14,7 +14,7 @@ const getMedia = (project) => {
       ></iframe>
     );
   } else {
-    var projectImage = "images/portfolio/thumbnails/" + project.image;
+    const projectImage = "images/portfolio/thumbnails/" + project.image;
     return <img alt={project.title} src={projectImage} />;
   }
 };

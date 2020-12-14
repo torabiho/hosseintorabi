@@ -1,55 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
+import { Link, Events } from "react-scroll";
+import "./Header.scss";
 
-class Header extends Component {
-  render() {
-    if(this.props.data){
-      var bio = this.props.data[0];
-      var name = bio.name;
-      var occupation= bio.occupation;
-      var description= bio.description;
-      var city= bio.address.city;
-      var networks= bio.social.map(network => {
-        return <li key={network.name}><a href={network.url} target='_blank'><i className={network.className}></i></a></li>
-      })
+const Header = props => {
+
+   const [onHeader, toggleOnHeader] = useState(true);
+   const [menuVisible, setMenuVisibility] = useState(false);
+
+   useEffect(() => {
+     Events.scrollEvent.register('begin', () => setMenuVisibility(false));
+
+    return () => {
+      Events.scrollEvent.remove('begin');
     }
+  }, []);
+   
+   const getHeaderInfo = bio =>{
+      return <>
+            <h1 className="responsive-headline">I'm {bio.name}.</h1>
+            <h3>I'm a {bio.address.city} based <span>{bio.occupation}</span>. {bio.description}.</h3>
+            <hr />
+            <ul className="social">
+               Find me on:
+               {bio.social.map(network => <li key={network.name}>
+                     <a href={network.url} target='_blank'>
+                        <i className={network.className}></i>
+                     </a>
+                  </li>
+               )}
+            </ul>
+         </>
+   }
 
     return (
       <header id="home">
+         <nav id="nav-wrap" className={onHeader ? "opaque" : ""}>
+            <div onClick={() => setMenuVisibility(!menuVisible)} className="mobile-btn" title="Show navigation"></div>
 
-      <nav id="nav-wrap">
-
-         <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-	      <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
-
-         <ul id="nav" className="nav">
-            <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
-            <li><a className="smoothscroll" href="#about">About</a></li>
-	         <li><a className="smoothscroll" href="#resume">Resume</a></li>
-            <li><a className="smoothscroll" href="#portfolio">Works</a></li>
-            <li><a className="smoothscroll" href="#testimonials">Testimonials</a></li>
-            <li><a className="smoothscroll" href="#contact">Contact</a></li>
-         </ul>
-
-      </nav>
-
-      <div className="row banner">
-         <div className="banner-text">
-            <h1 className="responsive-headline">I'm {name}.</h1>
-            <h3>I'm a {city} based <span>{occupation}</span>. {description}.</h3>
-            <hr />
-            <ul className="social">
-               Checkout my{networks}profile
+            <ul id="nav" className={!menuVisible ? "mobileHidden" : ""}>
+               <li><Link activeClass="current" to="home" spy={true} smooth={true} duration={1000} onSetInactive={() => toggleOnHeader(!onHeader)} onSetActive={() => toggleOnHeader(!onHeader)}>Home</Link></li>
+               <li><Link activeClass="current" to="about" spy={true} smooth={true} duration={1000}>About</Link></li>
+               <li><Link activeClass="current" to="resume" spy={true} smooth={true} duration={1000}>Resume</Link></li>
+               <li><Link activeClass="current" to="portfolio" spy={true} smooth={true} duration={1000}>Works</Link></li>
+               <li><Link activeClass="current" to="testimonials" spy={true} smooth={true} duration={1000}>Testimonials</Link></li>
+               <li><Link activeClass="current" to="contact" spy={true} smooth={true} duration={1000}>Contact</Link></li>             
             </ul>
+         </nav>
+
+         <div className="row banner">
+            <div className="banner-text">
+               {props.data && getHeaderInfo(props.data[0])}
+            </div>
          </div>
-      </div>
 
-      <p className="scrolldown">
-         <a className="smoothscroll" href="#about"><i className="icon-down-circle"></i></a>
-      </p>
-
-   </header>
+         <p className="scrolldown">
+            <Link activeClass="current" to="about" spy={true} smooth={true} duration={1000}><i className="icon-down-circle"></i></Link>
+         </p>
+      </header>
     );
-  }
+  
 }
 
 export default Header;
