@@ -10,6 +10,7 @@ import skill from "./api/routes/skill";
 import project from "./api/routes/project";
 import testimonial from "./api/routes/testimonial";
 import work from "./api/routes/work";
+import email from './api/routes/email';
 import all from "./api/routes/all";
 
 const port = process.env.PORT || 50080;
@@ -30,6 +31,7 @@ app.use('/api/skills',skill);
 app.use('/api/projects',project);
 app.use('/api/testimonials',testimonial);
 app.use('/api/works',work);
+app.use('/api/send-email', email);
 app.use('/api', all);
 
 // All remaining requests return the React app, so it can handle routing.
