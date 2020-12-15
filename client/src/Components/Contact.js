@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./Contact.scss";
 import axios from 'axios';
 
 class Contact extends Component {
@@ -55,10 +56,10 @@ class Contact extends Component {
     return (
       <section id="contact">
          <div className="row section-head">
-            <div className="two columns header-col">
-               <h1><span>Get In Touch.</span></h1>
+            <div className="three columns section-head__title">
+               <h1><span>Contact Me</span></h1>
             </div>
-            <div className="ten columns">
+            <div className="nine columns section-head__description">
                <p className="lead">{this.props.data && this.props.data[0].contactmessage}</p>
             </div>
          </div>
@@ -90,7 +91,7 @@ class Contact extends Component {
 					</fieldset>
 				   </form>
 
-               {this.state.status === "error" && <div id="message-warning"> Error boy</div>}
+                {this.state.status === "error" && <div id="message-warning"> Error boy</div>}
 				   {this.state.status === "sent" && <div id="message-success">
                   <i className="fa fa-check"></i>Your message was sent, thank you!<br />
 				   </div>}
