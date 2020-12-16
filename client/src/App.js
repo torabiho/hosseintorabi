@@ -7,42 +7,49 @@ import Resume from "./Components/Resume";
 import Contact from "./Components/Contact";
 import Testimonials from "./Components/Testimonials";
 import Portfolio from "./Components/Portfolio";
-import { getResumeData } from "./apiResources/resumeData";
+import { getResumeData } from "./apiResources/endpoints";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      resumeData: {}
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			resumeData: {},
+		};
 
-    ReactGA.initialize("UA-110570651-1");
-    ReactGA.pageview(window.location.pathname);
-  }
+		ReactGA.initialize("UA-110570651-1");
+		ReactGA.pageview(window.location.pathname);
+	}
 
-  async componentDidMount() {
-    try {
-      const resumeData = await getResumeData();
-      this.setState({ resumeData });
-    } catch (error) {
-      this.setState({ error });
-    }
-  }
+	async componentDidMount() {
+		try {
+			const resumeData = await getResumeData();
+			this.setState({ resumeData });
+		} catch (error) {
+			this.setState({ error });
+		}
+	}
 
-  render() {
-    const {bios, educations, works, skills, projects, testimonials } = this.state.resumeData;
-    return (
-      <div className="App">
-        <Header data={bios} />
-        <About data={bios} />
-        <Resume educations={educations} works={works} skills={skills} />
-        <Portfolio data={projects} />
-        <Testimonials data={testimonials} />
-        <Contact data={bios} />
-        <Footer data={bios} />
-      </div>
-    );
-  }
+	render() {
+		const {
+			bios,
+			educations,
+			works,
+			skills,
+			projects,
+			testimonials,
+		} = this.state.resumeData;
+		return (
+			<div className="App">
+				<Header data={bios} />
+				<About data={bios} />
+				<Resume educations={educations} works={works} skills={skills} />
+				<Portfolio data={projects} />
+				<Testimonials data={testimonials} />
+				<Contact data={bios} />
+				<Footer data={bios} />
+			</div>
+		);
+	}
 }
 
 export default App;

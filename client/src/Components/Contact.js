@@ -1,105 +1,194 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./Contact.scss";
-import axios from 'axios';
+import { sendEmail } from "../apiResources/endpoints";
+
+const sendingStatus = {
+	ERROR: "error",
+	SENDING: "sending",
+	SENT: "sent",
+};
 
 class Contact extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: "",
+			message: "",
+			subject: "",
+			email: "",
+			status: "",
+		};
+	}
 
-   state = {
-        name: '',
-        message: '',
-        subject: '',
-        email: '',
-        status: '',
-        buttonText: 'Send Message'
-    }
+	handleChange = (e) => {
+		const fieldName = e.currentTarget.getAttribute("name");
+		this.setState({ [fieldName]: e.target.value });
+	};
 
-   handleChange = (e) => {
-      const fieldName = e.currentTarget.getAttribute("name");
-      this.setState({ [fieldName]: e.target.value});
-   }
+	handleRequiredFields = (fieldName) => {
+		if (
+			this.state.status === sendingStatus.ERROR &&
+			this.state[fieldName].length === 0
+		) {
+			return <span className="error"> * Required</span>;
+		}
 
-   formSubmit = (e) => {
-      e.preventDefault();
+		return <span className="required"> *</span>;
+	};
 
-      this.setState({
-            status: 'sending'
-      });
+	allRequiredFieldsCompleted = () => {
+		const { name, email, message } = this.state;
+		return name.length > 0 && email.length > 0 && message.length > 0;
+	};
 
-      let data = {
-         name: this.state.name,
-         email: this.state.email,
-         subject: this.state.subject,
-         message: this.state.message
-      }
-      
-      axios.post('/api/send-email', data)
-      .then( res => {
-            this.setState({ status: "sent" }, this.resetForm());
-            console.log(res);
-      })
-      .catch(error => {
-         this.setState({ status: "error" });
-      })
-   }
+	getErrorMessage = () => {
+		if (this.state.status === sendingStatus.ERROR) {
+			const errorMessage = this.allRequiredFieldsCompleted()
+				? "Sorry, message was not sent, please try again"
+				: "Please fill out all required fields and try again";
+			return <div id="message-warning">{errorMessage}</div>;
+		}
+		return null;
+	};
 
-   resetForm = () => {
-    this.setState({
-        name: '',
-        message: '',
-        subject: '',
-        email: '',
-        buttonText: 'Message Sent'
-    })
-}
+	formSubmit = async (e) => {
+		e.preventDefault();
+		this.setState({
+			status: sendingStatus.SENDING,
+		});
 
-   render() {
-    return (
-      <section id="contact">
-         <div className="row section-head">
-            <div className="three columns section-head__title">
-               <h1><span>Contact Me</span></h1>
-            </div>
-            <div className="nine columns section-head__description">
-               <p className="lead">{this.props.data && this.props.data[0].contactmessage}</p>
-            </div>
-         </div>
+		const { name, email, subject, message } = this.state;
 
-         <div className="row">
-            <div className="twelve columns">
-               <form id="contactForm" name="contactForm" onSubmit={ (e) => this.formSubmit(e)}>
-					<fieldset>
-                  <div>
-						   <label htmlFor="contactName">Name <span className="required">*</span></label>
-						   <input type="text" size="35" id="contactName" name="name" onChange={this.handleChange} value={this.state.name}/>
-                  </div>
-                  <div>
-						   <label htmlFor="contactEmail">Email <span className="required">*</span></label>
-						   <input type="text" size="35" id="contactEmail" name="email" onChange={this.handleChange} value={this.state.email}/>
-                  </div>
-                  <div>
-						   <label htmlFor="contactSubject">Subject</label>
-						   <input type="text" size="35" id="contactSubject" name="subject" onChange={this.handleChange} value={this.state.subject}/>
-                  </div>
-                  <div>
-                     <label htmlFor="contactMessage">Message <span className="required">*</span></label>
-                     <textarea cols="50" rows="15" id="contactMessage" name="message" onChange={this.handleChange} value={this.state.message}></textarea>
-                  </div>
-                  <div className="submit-wrapper">
-                     <button className="submit" disabled={this.state.status === "sending"}>Submit</button>
-                     {this.state.status === "sending" && <img id="image-loader" alt="" src="images/loader.gif" />}
-                  </div>
-					</fieldset>
-				   </form>
+		if (this.allRequiredFieldsCompleted()) {
+			try {
+				const data = { name, email, subject, message };
+				await sendEmail(data);
+				this.setState({ status: sendingStatus.SENT }, this.resetForm());
+			} catch (error) {
+				this.setState({ status: sendingStatus.ERROR });
+			}
+		} else {
+			this.setState({ status: sendingStatus.ERROR });
+		}
+	};
 
-                {this.state.status === "error" && <div id="message-warning"> Error boy</div>}
-				   {this.state.status === "sent" && <div id="message-success">
-                  <i className="fa fa-check"></i>Your message was sent, thank you!<br />
-				   </div>}
-           </div>
-      </div>
-   </section>
-    );
-  }
+	resetForm = () => {
+		this.setState({
+			name: "",
+			message: "",
+			subject: "",
+			email: "",
+			status: "",
+		});
+	};
+
+	renderInputField = (name, id, isRequired) => {
+		const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+		return (
+			<div>
+				<label htmlFor={id}>
+					{displayName}
+					{isRequired && this.handleRequiredFields(name)}
+				</label>
+				<input
+					type="text"
+					size="35"
+					id={id}
+					name={name}
+					onChange={this.handleChange}
+					value={this.state[name]}
+				/>
+			</div>
+		);
+	};
+
+	render() {
+		return (
+			<section id="contact">
+				<div className="row section-head">
+					<div className="three columns section-head__title">
+						<h1>
+							<span>Contact Me</span>
+						</h1>
+					</div>
+					<div className="nine columns section-head__description">
+						<p className="lead">
+							{this.props.data &&
+								this.props.data[0].contactmessage}
+						</p>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="twelve columns">
+						<form
+							id="contactForm"
+							name="contactForm"
+							onSubmit={this.formSubmit}
+						>
+							<fieldset>
+								{this.renderInputField(
+									"name",
+									"contactName",
+									true
+								)}
+								{this.renderInputField(
+									"email",
+									"contactEmail",
+									true
+								)}
+								{this.renderInputField(
+									"subject",
+									"contactSubject",
+									false
+								)}
+								<div>
+									<label htmlFor="contactMessage">
+										Message
+										{this.handleRequiredFields("message")}
+									</label>
+									<textarea
+										cols="50"
+										rows="15"
+										id="contactMessage"
+										name="message"
+										onChange={this.handleChange}
+										value={this.state.message}
+									></textarea>
+								</div>
+								<div className="submit-wrapper">
+									<button
+										className="submit"
+										disabled={
+											this.state.status ===
+											sendingStatus.SENDING
+										}
+									>
+										Submit
+									</button>
+									{this.state.status ===
+										sendingStatus.SENDING && (
+										<img
+											id="image-loader"
+											alt="loader"
+											src="images/loader.gif"
+										/>
+									)}
+								</div>
+							</fieldset>
+						</form>
+						{this.getErrorMessage()}
+						{this.state.status === sendingStatus.SENT && (
+							<div id="message-success">
+								<i className="fa fa-check"></i>Your message was
+								sent, thank you!
+							</div>
+						)}
+					</div>
+				</div>
+			</section>
+		);
+	}
 }
 
 export default Contact;
