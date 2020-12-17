@@ -35,7 +35,9 @@
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
     "react-scroll": "^1.8.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "uuid": "^8.3.2",
+    "ws": "^7.4.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.7",
