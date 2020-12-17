@@ -130,6 +130,8 @@ class Contact extends Component {
 	};
 
 	render() {
+		const { message, status, response } = this.state;
+		const { data } = this.props;
 		return (
 			<section id="contact">
 				<div className="row section-head">
@@ -139,10 +141,7 @@ class Contact extends Component {
 						</h1>
 					</div>
 					<div className="nine columns section-head__description">
-						<p className="lead">
-							{this.props.data &&
-								this.props.data[0].contactmessage}
-						</p>
+						<p className="lead">{data && data[0].contactmessage}</p>
 					</div>
 				</div>
 
@@ -180,21 +179,19 @@ class Contact extends Component {
 										id="contactMessage"
 										name="message"
 										onChange={this.handleChange}
-										value={this.state.message}
+										value={message}
 									></textarea>
 								</div>
 								<div className="submit-wrapper">
 									<button
 										className="submit"
 										disabled={
-											this.state.status ===
-											sendingStatus.SENDING
+											status === sendingStatus.SENDING
 										}
 									>
 										Submit
 									</button>
-									{this.state.status ===
-										sendingStatus.SENDING && (
+									{status === sendingStatus.SENDING && (
 										<img
 											id="image-loader"
 											alt="loader"
@@ -204,7 +201,7 @@ class Contact extends Component {
 								</div>
 							</fieldset>
 						</form>
-						{this.state.response && this.renderSubmitResponse()}
+						{response && this.renderSubmitResponse()}
 					</div>
 				</div>
 			</section>
