@@ -20,7 +20,13 @@ const getMedia = (project) => {
 };
 
 const getProjects = (project) => (
-	<li key={project._id}>
+	<li
+		key={project._id}
+		data-aos="fade-right"
+		data-aos-offset="400"
+		data-aos-delay="50"
+		data-aos-once="true"
+	>
 		<div className="timeline-content">
 			{/* <h3 className="date">{project.date}</h3> */}
 			<h1>{project.title}</h1>

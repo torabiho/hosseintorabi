@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
+import AOS from "aos";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import About from "./Components/About";
@@ -8,6 +9,7 @@ import Contact from "./Components/Contact";
 import Testimonials from "./Components/Testimonials";
 import Portfolio from "./Components/Portfolio";
 import { getResumeData } from "./apiResources/endpoints";
+import "aos/dist/aos.css";
 
 class App extends Component {
 	constructor(props) {
@@ -15,7 +17,7 @@ class App extends Component {
 		this.state = {
 			resumeData: {},
 		};
-
+		AOS.init();
 		ReactGA.initialize("UA-110570651-1");
 		ReactGA.pageview(window.location.pathname);
 	}

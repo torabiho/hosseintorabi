@@ -110,6 +110,7 @@
 				}
 
 				&:nth-child(odd) {
+					left: -1px;
 					float: left;
 					clear: right;
 					transform: translateX(-30px);
@@ -117,11 +118,12 @@
 
 					&::before {
 						transform: translate(50%, -50%);
-						right: -30px;
+						right: 0;
 					}
 				}
 
 				&:nth-child(even) {
+					right: -1px;
 					float: right;
 					clear: left;
 					transform: translateX(30px);
@@ -129,7 +131,7 @@
 
 					&::before {
 						transform: translate(-50%, -50%);
-						left: -30px;
+						left: 0;
 					}
 				}
 			}
