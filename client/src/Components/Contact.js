@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Contact.scss";
 import { sendEmail } from "../apiResources/endpoints";
+import { isEmailValid } from "../utilities/helpers";
 
 const sendingStatus = {
 	ERROR: "error",
@@ -11,18 +12,20 @@ const sendingStatus = {
 class Contact extends Component {
 	constructor(props) {
 		super(props);
+		this.responseRef = React.createRef();
 		this.state = {
 			name: "",
 			message: "",
 			subject: "",
 			email: "",
 			status: "",
+			response: false,
 		};
 	}
 
 	handleChange = (e) => {
 		const fieldName = e.currentTarget.getAttribute("name");
-		this.setState({ [fieldName]: e.target.value });
+		this.setState({ [fieldName]: e.target.value, response: false });
 	};
 
 	handleRequiredFields = (fieldName) => {
@@ -42,24 +45,46 @@ class Contact extends Component {
 	};
 
 	getErrorMessage = () => {
-		if (this.state.status === sendingStatus.ERROR) {
-			const errorMessage = this.allRequiredFieldsCompleted()
-				? "Sorry, message was not sent, please try again"
-				: "Please fill out all required fields and try again";
-			return <div id="message-warning">{errorMessage}</div>;
+		let errorMessage = "";
+		if (!this.allRequiredFieldsCompleted()) {
+			errorMessage = "Please fill out all required fields and try again";
+		} else if (!isEmailValid(this.state.email)) {
+			errorMessage = "Please enter a valid email address";
+		} else {
+			errorMessage = "Sorry, message was not sent, please try again";
 		}
-		return null;
+
+		return <div id="message-warning">{errorMessage}</div>;
+	};
+
+	getSuccessResponse = () => (
+		<div id="message-success">
+			<i className="fa fa-check"></i>Your message was sent, thank you!
+		</div>
+	);
+
+	renderSubmitResponse = () => {
+		const { status } = this.state;
+		switch (status) {
+			case sendingStatus.ERROR:
+				return this.getErrorMessage();
+			case sendingStatus.SENT:
+				return this.getSuccessResponse();
+			default:
+				break;
+		}
 	};
 
 	formSubmit = async (e) => {
 		e.preventDefault();
 		this.setState({
 			status: sendingStatus.SENDING,
+			response: true,
 		});
 
 		const { name, email, subject, message } = this.state;
 
-		if (this.allRequiredFieldsCompleted()) {
+		if (this.allRequiredFieldsCompleted() && isEmailValid(email)) {
 			try {
 				const data = { name, email, subject, message };
 				await sendEmail(data);
@@ -68,7 +93,9 @@ class Contact extends Component {
 				this.setState({ status: sendingStatus.ERROR });
 			}
 		} else {
-			this.setState({ status: sendingStatus.ERROR });
+			this.setState({
+				status: sendingStatus.ERROR,
+			});
 		}
 	};
 
@@ -177,13 +204,7 @@ class Contact extends Component {
 								</div>
 							</fieldset>
 						</form>
-						{this.getErrorMessage()}
-						{this.state.status === sendingStatus.SENT && (
-							<div id="message-success">
-								<i className="fa fa-check"></i>Your message was
-								sent, thank you!
-							</div>
-						)}
+						{this.state.response && this.renderSubmitResponse()}
 					</div>
 				</div>
 			</section>
