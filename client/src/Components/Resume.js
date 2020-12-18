@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { compareValues } from "../utilities/helpers";
 
 class Resume extends Component {
   render() {
 
     if(this.props.educations){
-      var educationsList = this.props.educations.map(education => {
+      var educationsList = this.props.educations.sort(compareValues("graduation")).map(education => {
         return <div key={education.school}><h3>{education.school}</h3>
         <p className="info">{education.degree}</p>
         <p>{education.description}</p></div>
