@@ -5,14 +5,9 @@ class About extends Component {
 
     if(this.props.data){
        var bio = this.props.data[0];
-      var name = bio.name;
       var profilepic= "images/"+bio.image;
       var bio1 = bio.bio1;
       var bio2 = bio.bio2;
-      var city = bio.address.city;
-      var country = bio.address.country;
-      var email = bio.email;
-      var resumeDownload = bio.resumedownload;
     }
 
     return (
