@@ -9,6 +9,7 @@ const ProjectSchema = mongoose.Schema({
     date: {type: Number, required: false},
     videoLink: { type: String, required: false },
     url: { type: String, required: false },
+    order: {type: Number, required: true},
 });
 
 export default mongoose.model('Project', ProjectSchema);

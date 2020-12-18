@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { compareValues } from "../utilities/helpers";
 import "./Portfolio.scss";
 
 const getMedia = (project) => {
@@ -35,7 +36,7 @@ const getProjects = (project) => (
 			{project.url && (
 				<p>
 					Click{" "}
-					<a href={project.url} target="_blank">
+					<a className="timeline-content__link" href={project.url} target="_blank">
 						here
 					</a>{" "}
 					for more details
@@ -50,7 +51,7 @@ const Portfolio = ({ data }) => {
 		<section id="portfolio" className="portfolio-container">
 			<h1 className="portfolio__header"> Check Out Some of My Works </h1>
 			<div className="timeline">
-				<ul>{data && data.map((project) => getProjects(project))}</ul>
+				<ul>{data && data.sort(compareValues("order")).map((project) => getProjects(project))}</ul>
 			</div>
 		</section>
 	);

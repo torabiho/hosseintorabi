@@ -51,6 +51,14 @@
 				margin-bottom: 10px;
 			}
 
+			.timeline-content__link,
+			.timeline-content__link:visited {
+				color: #f06000;
+				&:hover {
+					color: #11abb0;
+				}
+			}
+
 			p {
 				font-size: 16px;
 				line-height: 30px;
