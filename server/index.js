@@ -3,6 +3,7 @@ import cors from "cors";
 import path from "path";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import expressWs from 'express-ws';
 import { dbConnectionInfo } from "../config.js";
 import education from "./api/routes/education";
 import bio from "./api/routes/bio";
@@ -16,6 +17,7 @@ import portfolio from "./api/routes/portfolio";
 
 const port = process.env.PORT || 50080;
 const app = express();
+const ws = expressWs(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

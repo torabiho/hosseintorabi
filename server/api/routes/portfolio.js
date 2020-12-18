@@ -1,27 +1,15 @@
 import express from "express";
+import expressWs from 'express-ws';
+import photos from "./photos";
 const router = express.Router();
-const WebSocket = require("ws");
-const photos = require("./photos");
+const wss = expressWs(router);
+const clients = new Set();
 
 router.get("/", (req, res) => {
-	console.log("hey");
 	res.status(200).json({ photos });
 });
 
-const clients = new Set();
-
 router.post("/website/photos/:id", (req, res) => {
-	const wss = new WebSocket.Server({ path: "/ws", server: req.app });
-	wss.on("connection", (ws) => {
-		clients.add(ws);
-		console.log("WebSocket connection established");
-
-		ws.on("close", () => {
-			clients.delete(ws);
-			console.log("WebSocket connection closed");
-		});
-	});
-
 	const photo = photos.find((p) => {
 		return p.id === req.params.id;
 	});
@@ -45,5 +33,16 @@ router.post("/website/photos/:id", (req, res) => {
 	}, timeout);
 	res.status(200).json({ photo });
 });
+
+router.ws('/ws', function(ws, req) {
+  clients.add(ws);
+	console.log("WebSocket connection established");
+
+	ws.on("close", () => {
+		clients.delete(ws);
+		console.log("WebSocket connection closed");
+	});
+});
+
 
 module.exports = router;
