@@ -24,7 +24,7 @@ const getProjects = (project) => (
 	<li
 		key={project._id}
 		data-aos="fade-right"
-		data-aos-offset="400"
+		data-aos-offset="200"
 		data-aos-delay="50"
 		data-aos-once="true"
 	>

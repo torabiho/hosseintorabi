@@ -41,7 +41,7 @@ const Header = props => {
                <li><Link activeClass="current" to="home" spy={true} smooth={true} duration={1000} onSetInactive={() => toggleOnHeader(!onHeader)} onSetActive={() => toggleOnHeader(!onHeader)}>Home</Link></li>
                <li><Link activeClass="current" to="about" spy={true} smooth={true} duration={1000}>About</Link></li>
                <li><Link activeClass="current" to="resume" spy={true} smooth={true} duration={1000}>Resume</Link></li>
-               <li><Link activeClass="current" to="portfolio" spy={true} smooth={true} duration={1000}>Works</Link></li>
+               <li><Link activeClass="current" to="portfolio" spy={true} smooth={true} duration={1000}>Portfolio</Link></li>
                <li><Link activeClass="current" to="testimonials" spy={true} smooth={true} duration={1000}>Testimonials</Link></li>
                <li><Link activeClass="current" to="contact" spy={true} smooth={true} duration={1000}>Contact</Link></li>             
             </ul>
