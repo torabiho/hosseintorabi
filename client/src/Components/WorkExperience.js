@@ -5,7 +5,7 @@ export const WorkExperience = ({ works }) => {
 
     const worksList = works && works.map(work =>{
     return <div key={work.years}>
-        <h3>{work.company}</h3>
+        <h3 className="title">{work.company}</h3>
         <p className="subtitle">{work.title}
             <span>&bull;</span>
             <em className="work-experience__date">{work.years}</em>

@@ -7,39 +7,9 @@
 /* ================================================================== */
 
 
-/* screenwidth less than 1024px
---------------------------------------------------------------------- */
-@media only screen and (max-width: 1024px) {
-
-    /* header styles
-   ------------------------------------------------------------------ */
-   header .banner-text h1 {
-      font: 80px/1.1em 'opensans-bold', sans-serif;
-      letter-spacing: -1px;
-      margin: 0 auto 12px auto;
-   }
-
-}
-
 /* screenwidth less than 900px
 --------------------------------------------------------------------- */
 @media only screen and (max-width: 900px) {
-
-    /* header styles
-   ------------------------------------------------------------------ */
-   header .banner { padding-bottom: 12px; }
-   header .banner-text h1 {
-      font: 78px/1.1em 'opensans-bold', sans-serif;
-      letter-spacing: -1px;      
-   }
-   header .banner-text h3 {
-      font: 17px/1.9em 'librebaskerville-regular', serif;
-      width: 80%;
-   }
-   header .banner-text hr {
-      width: 65%;
-      margin: 12px auto;
-   }
    /* nav-wrap */
    #nav-wrap {
       font: 11px 'opensans-bold', sans-serif;
@@ -157,20 +127,6 @@
 
    /* Header Styles
    -------------------------------------------------------------------- */
-   header .banner {
-      padding-bottom: 12px;
-      padding-top: 6px;
-   }
-   header .banner-text h1 { font: 68px/1.1em 'opensans-bold', sans-serif; }
-   header .banner-text h3 {
-      font: 16px/1.9em 'librebaskerville-regular', serif;
-      width: 85%;
-   }
-   header .banner-text hr {
-      width: 80%;
-      margin: 18px auto;
-   }
-
    /* header social links */
    header .social {
       margin: 18px 0 24px 0;
@@ -249,17 +205,7 @@
    #nav-wrap ul#nav { width: auto; float: right; }
 
    /* header styles
-   -------------------------------------------------------------------- */
-   header .banner { padding-top: 24px; }
-   header .banner-text h1 {
-      font: 40px/1.1em 'opensans-bold', sans-serif;      
-      margin: 0 auto 24px auto;
-   }
-   header .banner-text h3 {
-      font: 14px/1.9em 'librebaskerville-regular', sans-serif;
-      width: 90%;
-   }
-  
+   -------------------------------------------------------------------- */  
    /* header social links */
    header .social { font-size: 20px;}
    header .social li { margin: 0 6px; }
