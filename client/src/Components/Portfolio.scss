@@ -89,7 +89,7 @@
 		&:before {
 			content: "";
 			position: absolute;
-			top: 0;
+			top: 12px;
 			left: 50%;
 			transform: translateX(-50%);
 			width: 2px;
@@ -118,28 +118,26 @@
 				}
 
 				&:nth-child(odd) {
-					left: -1px;
+					left: -30px;
 					float: left;
 					clear: right;
 					transform: translateX(-30px);
 					border-radius: 20px 0px 20px 20px;
 
 					&::before {
-						transform: translate(50%, -50%);
-						right: 0;
+						right: -40px;
 					}
 				}
 
 				&:nth-child(even) {
-					right: -1px;
+					right: -30px;
 					float: right;
 					clear: left;
 					transform: translateX(30px);
 					border-radius: 0px 20px 20px 20px;
 
 					&::before {
-						transform: translate(-50%, -50%);
-						left: 0;
+						left: -40px;
 					}
 				}
 			}

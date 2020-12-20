@@ -6,7 +6,26 @@
    padding-bottom: 30px;
    text-align: center;
 
-   .banner__container { width: 100%;
+   .banner__container { 
+      width: 100%;
+      .social {
+         margin: 24px 0;
+         padding: 0;
+         font-size: 30px;
+         color: darkorange;
+         text-shadow: 0px 1px 2px rgba(0, 0, 0, .8);
+
+         li {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 0;
+
+            a { 
+               color: #fff; 
+               &:hover { color: #11ABB0; }
+            }
+         }
+      }
       h1 {
          font: 90px/1.1em 'opensans-bold', sans-serif;
          color: #fff;
@@ -78,6 +97,12 @@
          .banner__header{
             font-size: 40px;
          }
+         .social {
+            margin: 18px 0 24px 0;
+            font-size: 24px;
+            line-height: 36px;
+            li { margin: 0 10px; }     
+         }
          h1 { font: 68px/1.1em 'opensans-bold', sans-serif; }
          h3 {
             font: 16px/1.9em 'librebaskerville-regular', serif;
@@ -89,7 +114,6 @@
          }
       }
    }
-   
 }
 
 @media only screen and (max-width: 480px) {
@@ -98,14 +122,21 @@
       .banner__header{
             font-size: 35px;
       }
-      .banner__container h1 {
-         font: 40px/1.1em 'opensans-bold', sans-serif;      
-         margin: 0 auto 24px auto;
-      }
-      .banner__container h3 {
-         font: 14px/1.9em 'librebaskerville-regular', sans-serif;
-         width: 90%;
+      .banner__container {
+         h1 {
+            font: 40px/1.1em 'opensans-bold', sans-serif;      
+            margin: 0 auto 24px auto;
+         }
+         h3 {
+            font: 14px/1.9em 'librebaskerville-regular', sans-serif;
+            width: 90%;
+         }
+         .social { 
+            font-size: 20px;
+            li { 
+               margin: 0 6px; 
+            }
+         }
       }
    }
 }
-
