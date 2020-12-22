@@ -1,0 +1,69 @@
+#about {
+    background: #2B2B2B;
+    padding-top: 96px;
+    padding-bottom: 66px;
+    overflow: hidden;
+
+    a, a:visited  { color: #fff; }
+    a:hover, a:focus { color: #11ABB0; }
+
+    h2 {
+        font: 22px/30px 'opensans-bold', sans-serif;
+        color: #fff;
+        margin-bottom: 12px;
+    }
+    p {
+        line-height: 30px;
+        color: #7A7A7A;
+    }
+    .profile-pic {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+    }
+    .contact-details { width: 41.66667%; }
+    .download {
+        width: 58.33333%;
+        padding-top: 6px;
+    }
+    .main-col { padding-right: 5%; }
+    .download { 
+        .button {
+            margin-top: 6px;
+            background: #444;
+            &:hover {
+                background: #fff;
+                color: #2B2B2B;
+            }
+            i {
+                margin-right: 15px;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+   #about { 
+       .profile-pic {
+            width: 114px;
+            height: 114px;
+            margin-left: 12px;
+        }
+    .contact-details { width: 50%; }
+    .download { width: 50%; }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+   #about {
+       .profile-pic { display: none; }
+       .download .button {
+            width: 100%;
+            text-align: center;
+            padding: 15px 20px;
+        }
+        .main-col { padding-right: 30px; }
+    }
+}

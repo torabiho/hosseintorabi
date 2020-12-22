@@ -11,7 +11,7 @@ import Testimonials from "./Components/Testimonials";
 import Portfolio from "./Components/Portfolio";
 import { getResumeData } from "./apiResources/endpoints";
 import { loadingStates } from "./constants";
-import "aos/dist/aos.css";
+import "./App.scss";
 
 class App extends Component {
 	constructor(props) {

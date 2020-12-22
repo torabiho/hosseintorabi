@@ -1,0 +1,99 @@
+#testimonials {
+    background: #1F1F1F url(../images/testimonials-bg.jpg) no-repeat center top;
+    background-size: cover;
+	-webkit-background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 200px;
+    width: 100%;
+    overflow: hidden;
+
+    .text-container {
+        padding-top: 96px;
+        padding-bottom: 66px;
+    }
+    h1 {
+        font: 18px/24px 'opensans-bold', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #fff;
+        span { display: none; }
+    }
+
+    .header-col { 
+        padding-top: 9px;
+        h1:before {
+            font-family: 'FontAwesome';
+            content: "\f10d";
+                padding-right: 10px;
+                font-size: 72px;
+            line-height: 72px;
+            text-align: left;
+            float: left;
+            color: #fff;
+        }
+    }
+
+    blockquote {
+        margin: 0 0px 30px 0px;
+        padding-left: 0;
+        position: relative;
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+
+        &:before { content: none; }
+
+        p {
+            font-family: 'librebaskerville-italic', serif;
+            padding: 0;
+            font-size: 24px;
+            line-height: 48px;
+            color: #fff
+        }
+
+        cite {
+            display: block;
+            font-size: 12px;
+            font-style: normal;
+            line-height: 18px;
+            color: #fff;
+
+            &:before { content: "\2014 \0020"; }
+            a,
+            a:visited { color: #8B9798; border: none }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #testimonials { 
+       .header-col h1:before {
+            font-size: 66px;
+            line-height: 66px;
+        }
+        blockquote p {
+            font-size: 22px;
+            line-height: 46px;      
+        }
+    }   
+}
+
+@media only screen and (max-width: 767px) {
+   #testimonials { 
+       .text-container { text-align: center; }
+        h1 {
+            font: 16px/24px 'opensans-bold', sans-serif;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+            span { display: block; }
+        }
+        .header-col h1:before { content: none; }
+        blockquote { 
+            padding-bottom: 24px;  
+            p {
+                font-size: 20px;
+                line-height: 42px;      
+            }
+        }
+    }
+}
