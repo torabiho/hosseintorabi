@@ -7,6 +7,7 @@ const EducationSchema = mongoose.Schema({
     degree: { type: String, required: true },
     graduation: { type: Number, required: true },
     description: { type: String, required: true },
+    visible: { type: Boolean, required: true },
 });
 
 export default mongoose.model('Education', EducationSchema);

@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { compareValues } from "../utilities/helpers";
 import "./Education.scss";
 
 export const Education = ({ educations }) => {
-    const educationsList = educations && educations.sort(compareValues("graduation", "desc")).map(education => {
+    const educationsList = educations.sort(compareValues("graduation", "desc")).map(education => {
         return (
         <div key={education.school}>
             <h3 className="title">{education.school}</h3>
@@ -24,4 +25,14 @@ export const Education = ({ educations }) => {
             </div>
         </div>
     </div>
+}
+
+Education.propTypes = {
+   educations: PropTypes.arrayOf(
+      PropTypes.shape({
+            degree: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            graduation: PropTypes.number.isRequired,
+            school: PropTypes.string.isRequired,
+      })).isRequired
 }

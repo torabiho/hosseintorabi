@@ -1,7 +1,7 @@
 import Education from "../../models/education";
 
 exports.education_list = function (req, res) {
-    Education.find({}, function (err, education) {
+    Education.find({ visible: true }, {visible: 0}, function (err, education) {
         if (err) return next(err);
         res.send(education);
     })
