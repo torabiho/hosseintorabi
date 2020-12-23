@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { compareValues } from "../utilities/helpers";
 import "./Portfolio.scss";
 
@@ -51,10 +52,24 @@ const Portfolio = ({ data }) => {
 		<section id="portfolio" className="portfolio-container">
 			<h1 className="portfolio__header"> Check Out Some of My Works </h1>
 			<div className="timeline">
-				<ul>{data && data.sort(compareValues("order")).map((project) => getProjects(project))}</ul>
+				<ul>{data.sort(compareValues("order")).map((project) => getProjects(project))}</ul>
 			</div>
 		</section>
 	);
 };
+
+Portfolio.propTypes = {
+   data: PropTypes.arrayOf(
+      PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            order: PropTypes.number.isRequired,
+			title: PropTypes.string.isRequired,
+			description: PropTypes.string.isRequired,
+			image: PropTypes.string.isRequired,
+			date: PropTypes.number.isRequired,
+			videoLink: PropTypes.string,
+			url: PropTypes.string,
+      })).isRequired
+}
 
 export default Portfolio;

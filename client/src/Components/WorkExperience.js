@@ -31,7 +31,7 @@ export const WorkExperience = ({ works }) => {
         </p>
         <p>{work.description}{work.link && <span> Click <a href={work.link} target='_blank'>here</a> for more details.</span>}</p>
         {displayShowMore(index, works.length) && <h4 className={`${loadMore ? "hidden": "toggleShowMore"}`} onClick={() => setLoadMore(!loadMore)}>Show more</h4>}
-        {displayShowLess(index, works.length) && <h4 className={`${loadMore ? "toggleShowMore": "hidden"}`} onClick={() => {scroller.scrollTo('work-experience', { smooth: true, offset: -150})}}>Show less</h4>}
+        {displayShowLess(index, works.length) && <h4 className={`${loadMore ? "toggleShowMore": "hidden"}`} onClick={() => scroller.scrollTo('work-experience', { smooth: true, offset: -150})}>Show less</h4>}
     </div>
     })
 
