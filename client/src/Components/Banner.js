@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Banner.scss";
 
 const getBannerInfo = bio =>{
@@ -20,7 +21,25 @@ const getBannerInfo = bio =>{
 export const Banner = ({ data }) => {
     return <div className="row banner">
         <div className="banner__container">
-            {data && getBannerInfo(data[0])}
+            {getBannerInfo(data[0])}
         </div>
     </div>
+}
+
+Banner.propTypes = {
+   data: PropTypes.arrayOf(
+      PropTypes.shape({
+            address: PropTypes.shape({
+              city: PropTypes.string,
+            }),
+            description: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            occupation: PropTypes.string.isRequired,
+            social: PropTypes.arrayOf(PropTypes.shape({
+                name : PropTypes.string,
+                url: PropTypes.string,
+                className: PropTypes.string
+               })
+            )
+      }))
 }
