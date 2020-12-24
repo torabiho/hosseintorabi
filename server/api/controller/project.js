@@ -1,7 +1,7 @@
 import Project from "../../models/project";
 
 exports.project_list = function (req, res) {
-    Project.find({}, function (err, project) {
+    Project.find({ visible: true }, {visible: 0}, function (err, project) {
         if (err) return next(err);
         res.send(project);
     })

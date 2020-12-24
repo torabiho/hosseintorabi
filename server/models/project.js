@@ -10,6 +10,7 @@ const ProjectSchema = mongoose.Schema({
     videoLink: { type: String, required: false },
     url: { type: String, required: false },
     order: {type: Number, required: true},
+    visible: { type: Boolean, required: true }
 });
 
 export default mongoose.model('Project', ProjectSchema);

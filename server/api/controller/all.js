@@ -11,10 +11,10 @@ exports.all_list = async (req,res) => {
         const [bios, educations, projects, skills, testimonials, works ] = await Promise.all([
             Bio.find({}), 
             Education.find({ visible: true }, {visible: 0}),
-            Project.find({}),
-            Skill.find({}),
-            Testimonial.find({}),
-            Work.find({})
+            Project.find({ visible: true }, {visible: 0}),
+            Skill.find({ visible: true }, {visible: 0}),
+            Testimonial.find({ visible: true }, {visible: 0}),
+            Work.find({ visible: true }, {visible: 0})
         ]);
 
         const response = {bios, educations, projects, skills, testimonials, works };

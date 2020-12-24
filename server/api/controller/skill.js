@@ -1,7 +1,7 @@
 import Skill from "../../models/skill";
 
 exports.skill_list = function (req, res) {
-    Skill.find({}, function (err, skill) {
+    Skill.find({ visible: true }, {visible: 0}, function (err, skill) {
         if (err) return next(err);
         res.send(skill);
     })

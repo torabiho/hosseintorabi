@@ -1,7 +1,7 @@
 import Testimonial from "../../models/testimonial";
 
 exports.testimonial_list = function (req, res) {
-    Testimonial.find({}, function (err, testimonial) {
+    Testimonial.find({ visible: true }, {visible: 0}, function (err, testimonial) {
         if (err) return next(err);
         res.send(testimonial);
     })

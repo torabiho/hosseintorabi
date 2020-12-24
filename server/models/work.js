@@ -8,6 +8,7 @@ const WorkSchema = mongoose.Schema({
     years: { type: String, required: true },
     description: { type: String, required: true },
     link: { type: String, required: false },
+    visible: { type: Boolean, required: true }
 });
 
 export default mongoose.model('Work', WorkSchema);

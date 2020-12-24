@@ -1,38 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import "./Testimonials.scss";
 
-class Testimonials extends Component {
-  render() {
-    if(this.props.data){    
-      var testimonials = this.props.data.map(testimonial => {
-        return  <li key={testimonial.user}>
-            <blockquote>
-               <p>{testimonial.text}</p>
-               <cite>{testimonial.user}</cite>
-            </blockquote>
-         </li>
-      })
-    }
+const Testimonials = ({ data }) => { 
+   const getTestimonials = data.map(testimonial => {
+      return  <li key={testimonial._id}>
+         <blockquote>
+            <p>{testimonial.text}</p>
+            <cite>{testimonial.user}</cite>
+         </blockquote>
+      </li>
+   })
 
-    return (
-      <section id="testimonials">
-      <div className="text-container">
-         <div className="row">
-
-            <div className="two columns header-col">
-               <h1><span>Client Testimonials</span></h1>
-            </div>
-
-            <div className="ten columns flex-container">
-                  <ul className="slides">
-                      {testimonials}
-                  </ul>
-               </div>
+   return (
+   <section id="testimonials">
+   <div className="text-container">
+      <div className="row">
+         <div className="two columns header-col">
+            <h1><span>Client Testimonials</span></h1>
+         </div>
+         <div className="ten columns flex-container">
+               <ul className="slides">
+                     {getTestimonials}
+               </ul>
             </div>
          </div>
+      </div>
    </section>
-    );
-  }
+   );
+}
+
+Testimonials.propTypes = {
+   data: PropTypes.arrayOf(
+      PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            user: PropTypes.string.isRequired,
+      })).isRequired
 }
 
 export default Testimonials;
