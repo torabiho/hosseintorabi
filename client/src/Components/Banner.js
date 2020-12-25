@@ -37,8 +37,7 @@ Banner.propTypes = {
             occupation: PropTypes.string.isRequired,
             social: PropTypes.arrayOf(PropTypes.shape({
                 name : PropTypes.string,
-                url: PropTypes.string,
-                className: PropTypes.string
+                url: PropTypes.string
                })
             )
       }))
