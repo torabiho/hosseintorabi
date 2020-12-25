@@ -5,7 +5,7 @@ import "./Banner.scss";
 const getBannerInfo = bio =>{
     return <>
         <h1 className="banner__header">I'm {bio.name}.</h1>
-        <h3>I'm a {bio.address.city} based <span>{bio.occupation}</span>. {bio.description}.</h3>
+        <h3>I'm a {bio.address.city} based <span>{bio.occupation}</span>. {bio.description}</h3>
         <hr />
         <ul className="social">
             {bio.social.map(network => <li key={network.name}>
