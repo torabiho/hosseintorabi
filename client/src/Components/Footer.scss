@@ -52,10 +52,6 @@ footer {
 
 @media only screen and (max-width: 767px) {
     footer {
-        .social-links { 
-            font-size: 22px; 
-            li { margin-left: 18px; }
-        }
         #go-top { 
             margin-left: -22px;
             a {
@@ -66,13 +62,4 @@ footer {
             }
         }  
     }
-}
-
-@media only screen and (max-width: 480px) {
-   footer {
-        .social-links { 
-            font-size: 20px; 
-            li { margin-left: 14px; } 
-        } 
-   } 
 }

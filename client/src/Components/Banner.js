@@ -7,10 +7,10 @@ const getBannerInfo = bio =>{
         <h1 className="banner__header">I'm {bio.name}.</h1>
         <h3>I'm a {bio.address.city} based <span>{bio.occupation}</span>. {bio.description}.</h3>
         <hr />
-        <ul className="social">Find me on:
+        <ul className="social">
             {bio.social.map(network => <li key={network.name}>
                     <a href={network.url} target='_blank'>
-                    <i className={network.className}></i>
+                        <i className={`fa fa-${network.name}-square`}></i>
                     </a>
                 </li>
             )}

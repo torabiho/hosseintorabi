@@ -7,7 +7,7 @@ const Testimonials = ({ data }) => {
       return  <li key={testimonial._id}>
          <blockquote>
             <p>{testimonial.text}</p>
-            <cite>{testimonial.user}</cite>
+            <cite>{testimonial.user} <br /> {testimonial.organization}</cite>
          </blockquote>
       </li>
    })
@@ -17,7 +17,7 @@ const Testimonials = ({ data }) => {
       <div className="text-container">
          <div className="row">
             <div className="two columns header-col">
-               <h1><span>Client Testimonials</span></h1>
+               <h1><span>Testimonials</span></h1>
             </div>
             <div className="ten columns flex-container">
                <ul className="slides">
@@ -36,6 +36,7 @@ Testimonials.propTypes = {
             _id: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
             user: PropTypes.string.isRequired,
+            organization: PropTypes.string.isRequired
       })).isRequired
 }
 
