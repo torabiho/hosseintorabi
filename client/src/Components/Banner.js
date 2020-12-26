@@ -40,5 +40,5 @@ Banner.propTypes = {
                 url: PropTypes.string
                })
             )
-      }))
+      })).isRequired
 }
