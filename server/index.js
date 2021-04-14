@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import expressWs from 'express-ws';
 import { dbConnectionInfo } from "../config.js";
@@ -21,7 +20,6 @@ const ws = expressWs(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use(cors());
 
 // Priority serve any static files

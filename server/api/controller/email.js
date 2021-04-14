@@ -22,7 +22,8 @@ exports.send_email = function (req, res) {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            return next(err);
+            console.log("hossein test5", error);
+            return next(error);
         }
         res.send('Email sent Successfully');
         transporter.close();
