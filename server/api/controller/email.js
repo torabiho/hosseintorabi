@@ -1,7 +1,7 @@
 import nodeMailer from "nodemailer";
 import { emailInfo } from "../../../config";
 
-exports.send_email = function (req, res) {
+exports.send_email = function (req, res, next) {
     const transporter = nodeMailer.createTransport({
         host: emailInfo.host,
         port: emailInfo.port,
@@ -22,7 +22,6 @@ exports.send_email = function (req, res) {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.log("hossein test5", error);
             return next(error);
         }
         res.send('Email sent Successfully');
