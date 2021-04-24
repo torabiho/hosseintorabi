@@ -189,7 +189,7 @@ class Contact extends Component {
 											status === sendingStatus.SENDING
 										}
 									>
-										Submit
+										Send
 									</button>
 									{status === sendingStatus.SENDING && (
 										<img
