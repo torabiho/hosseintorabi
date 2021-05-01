@@ -22,8 +22,8 @@ const root = path.join(__dirname, '../client', 'build');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
 app.use(express.static(root)); // Priority serve any static files
+
 app.use("/api/educations", education);
 app.use("/api/bios", bio);
 app.use("/api/skills", skill);
