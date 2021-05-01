@@ -23,7 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Priority serve any static files
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+const root = path.join(__dirname, '../client', 'build');
+app.use(express.static(root));
+//app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use("/api/educations", education);
 app.use("/api/bios", bio);
@@ -36,9 +38,13 @@ app.use("/api/portfolio", portfolio);
 app.use("/api", all);
 
 // All remaining requests return the React app, so it can handle routing.
-app.get("*", function (request, response) {
-	response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
+// app.get("*", function (request, response) {
+// 	response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+// });
+
+app.get("*", (req, res) => {
+    res.sendFile('index.html', { root });
+})
 
 mongoose.connect(dbConnectionInfo.dbUrl, {
 	useNewUrlParser: true,
