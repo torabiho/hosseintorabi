@@ -17,16 +17,13 @@ import portfolio from "./api/routes/portfolio";
 const port = process.env.PORT || 50080;
 const app = express();
 const ws = expressWs(app);
+const root = path.join(__dirname, '../client', 'build');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Priority serve any static files
-const root = path.join(__dirname, '../client', 'build');
-app.use(express.static(root));
-//app.use(express.static(path.resolve(__dirname, "../client/build")));
-
+app.use(express.static(root)); // Priority serve any static files
 app.use("/api/educations", education);
 app.use("/api/bios", bio);
 app.use("/api/skills", skill);
@@ -38,10 +35,6 @@ app.use("/api/portfolio", portfolio);
 app.use("/api", all);
 
 // All remaining requests return the React app, so it can handle routing.
-// app.get("*", function (request, response) {
-// 	response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-// });
-
 app.get("*", (req, res) => {
     res.sendFile('index.html', { root });
 })
