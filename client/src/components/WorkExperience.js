@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Element, Events, scroller } from "react-scroll";
+import { compareValues } from "../utilities/helpers";
 import "./WorkExperience.scss";
 
 const displayShowMore = (index, worksLength) => {
@@ -22,12 +23,12 @@ export const WorkExperience = ({ works }) => {
         }
     }, []);
 
-    const worksList = works.map((work, index) =>{
+    const worksList = works.sort(compareValues("startYear", "desc")).map((work, index) =>{
     return <div key={work._id} className={`${index > 1 && !loadMore ? "hidden" : ""}`}>
         <h3 className="title">{work.company}</h3>
         <p className="subtitle">{work.title}
             <span>&bull;</span>
-            <em className="work-experience__date">{work.years}</em>
+            <em className="work-experience__date">{work.startYear} - {work.endYear || "Present"}</em>
         </p>
         <p>{work.description}{work.link && <span> Click <a href={work.link} target='_blank'>here</a> for more details.</span>}</p>
         {displayShowMore(index, works.length) && <h4 className={`${loadMore ? "hidden": "toggleShowMore"}`} onClick={() => setLoadMore(!loadMore)}>Show more</h4>}
@@ -51,7 +52,8 @@ WorkExperience.propTypes = {
             _id: PropTypes.string.isRequired,
             company: PropTypes.string.isRequired,
             link: PropTypes.string,
-            years: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
+            startYear: PropTypes.number.isRequired,
+            endYear: PropTypes.number
       })).isRequired
 }
