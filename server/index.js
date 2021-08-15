@@ -4,15 +4,7 @@ import path from "path";
 import mongoose from "mongoose";
 import expressWs from 'express-ws';
 import { dbConnectionInfo } from "../config.js";
-import education from "./api/routes/education";
-import bio from "./api/routes/bio";
-import skill from "./api/routes/skill";
-import project from "./api/routes/project";
-import testimonial from "./api/routes/testimonial";
-import work from "./api/routes/work";
-import email from "./api/routes/email";
-import all from "./api/routes/all";
-import portfolio from "./api/routes/portfolio";
+import mainSiteRouter from "./mainSite/mainSiteRouter";
 
 const port = process.env.PORT || 50080;
 const app = express();
@@ -23,16 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(root)); // Priority serve any static files
-
-app.use("/api/educations", education);
-app.use("/api/bios", bio);
-app.use("/api/skills", skill);
-app.use("/api/projects", project);
-app.use("/api/testimonials", testimonial);
-app.use("/api/works", work);
-app.use("/api/send-email", email);
-app.use("/api/portfolio", portfolio);
-app.use("/api", all);
+app.use("/api",mainSiteRouter);
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {

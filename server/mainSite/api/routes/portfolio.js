@@ -6,7 +6,6 @@ const wss = expressWs(router);
 const clients = new Set();
 
 router.get("/", (req, res) => {
-	console.log("hossein, getting photos");
 	res.status(200).json({ photos });
 });
 
@@ -36,12 +35,9 @@ router.post("/website/photos/:id", (req, res) => {
 });
 
 router.ws('/ws', function(ws, req) {
-	console.log("hossein, first");
   clients.add(ws);
 	console.log("WebSocket connection established");
-	console.log("hossein, second");
 	ws.on("close", () => {
-		console.log("hossein, third");
 		clients.delete(ws);
 		console.log("WebSocket connection closed");
 	});
