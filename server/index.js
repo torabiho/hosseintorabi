@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(root)); // Priority serve any static files
-app.use("/api",mainSiteRouter);
+app.use("/api",mainSiteRouter); // Handle all requests in the main site
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {
