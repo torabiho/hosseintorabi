@@ -3,7 +3,11 @@ dotenv.config();
 
 module.exports = {
     dbConnectionInfo: {
-        dbUrl: process.env.MONGODB_URL
+        dbUrl: process.env.MONGODB_URL,
+        dbs: {
+            blog: process.env.BLOG_DB,
+            portfolio: process.env.PORTFOLIO_DB,
+        }
     },
     emailInfo: {
         senderUser: process.env.EMAIL_SENDER_USER,

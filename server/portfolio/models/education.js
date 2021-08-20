@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 
+import { dbConnectionInfo } from "../../../config.js";
+
+const portfolioDB = mongoose.connection.useDb(dbConnectionInfo.dbs.portfolio);
 const EducationSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     school: { type: String, required: true },
@@ -9,4 +12,4 @@ const EducationSchema = mongoose.Schema({
     visible: { type: Boolean, required: true },
 });
 
-export default mongoose.model('Education', EducationSchema);
+export default portfolioDB.model('Education', EducationSchema);

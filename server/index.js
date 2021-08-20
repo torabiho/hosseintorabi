@@ -3,8 +3,10 @@ import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
 import expressWs from 'express-ws';
+import subdomain from "express-subdomain";
 import { dbConnectionInfo } from "../config.js";
-import mainSiteRouter from "./mainSite/mainSiteRouter";
+import portfolioRouter from "./portfolio/portfolioRouter";
+import blogRouter from "./blog/blogRouter";
 
 const port = process.env.PORT || 50080;
 const app = express();
@@ -15,7 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(root)); // Priority serve any static files
-app.use("/api",mainSiteRouter); // Handle all requests in the main site
+app.use("/api",portfolioRouter); // Handle all requests from the main site
+app.use(subdomain('blog', blogRouter)); // Handle all requests from the blog
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {

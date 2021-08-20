@@ -1,6 +1,8 @@
 
 import mongoose from 'mongoose';
+import { dbConnectionInfo } from "../../../config.js";
 
+const portfolioDB = mongoose.connection.useDb(dbConnectionInfo.dbs.portfolio);
 const WorkSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     company: { type: String, required: true },
@@ -12,4 +14,4 @@ const WorkSchema = mongoose.Schema({
     endYear: { type: Number, required: false }
 });
 
-export default mongoose.model('Work', WorkSchema);
+export default portfolioDB.model('Work', WorkSchema);

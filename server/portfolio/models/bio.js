@@ -1,6 +1,8 @@
 
 import mongoose from 'mongoose';
+import { dbConnectionInfo } from "../../../config.js";
 
+const portfolioDB = mongoose.connection.useDb(dbConnectionInfo.dbs.portfolio);
 const BioSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
@@ -24,4 +26,4 @@ const BioSchema = mongoose.Schema({
     }]
 });
 
-export default mongoose.model('Bio', BioSchema);
+export default portfolioDB.model('Bio', BioSchema);
