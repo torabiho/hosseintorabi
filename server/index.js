@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(root)); // Priority serve any static files
-app.use(vhost('blog.hosseintorabi.com', blogRouter));
+app.use(vhost('blog.api.hosseintorabi.com', blogRouter));
 //app.use(subdomain('blog', blogRouter)); // Handle all requests from the blog
 app.use("/api",portfolioRouter); // Handle all requests from the main site
 
