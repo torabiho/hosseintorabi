@@ -3,6 +3,7 @@ import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
 import expressWs from 'express-ws';
+import subdomain from 'express-subdomain';
 import { dbConnectionInfo } from "../config.js";
 import portfolioRouter from "./portfolio/portfolioRouter";
 import blogRouter from "./blog/blogRouter";
