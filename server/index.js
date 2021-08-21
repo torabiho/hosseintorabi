@@ -21,9 +21,9 @@ app.use(subdomain('blog', blogRouter)); // Handle all requests from the blog
 //app.use("/api",portfolioRouter); // Handle all requests from the main site
 
 // All remaining requests return the React app, so it can handle routing.
-app.get("*", (req, res) => {
-    res.sendFile('index.html', { root });
-})
+// app.get("*", (req, res) => {
+//     res.sendFile('index.html', { root });
+// })
 
 mongoose.connect(dbConnectionInfo.dbUrl, {
 	useNewUrlParser: true,
