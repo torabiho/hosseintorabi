@@ -1,7 +1,8 @@
 import Post from "../../models/post";
 
-exports.test_list = function (req, res, next) {
+exports.post_list = function (req, res, next) {
     Post.find({ visible: true }, {visible: 0}, function (err, posts) {
+        console.log("hossein inside post_list");
         if (err) return next(err);
         res.send(posts);
     })
