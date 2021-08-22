@@ -1,16 +1,19 @@
 import Post from "../../models/post";
 
 exports.post_list = function (req, res, next) {
-    console.log("hossein accepted language", req.headers["accept-language"]);
-    Post.find({ visible: true }, {visible: 0, fa: 0}, function (err, posts) {
-        if (err) return next(err);
-        res.send(posts);
-    })
+  Post.find(
+    { visible: true },
+    { visible: 0, [req.headers["accept-language"]]: 1 },
+    function (err, posts) {
+      if (err) return next(err);
+      res.send(posts);
+    }
+  );
 };
 
 exports.post_details = function (req, res, next) {
-    Post.findById(req.params.id, function (err, post) {
-        if (err) return next(err);
-        res.send(post);
-    })
+  Post.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.send(post);
+  });
 };
