@@ -1,10 +1,16 @@
 import Post from "../../models/post";
 
 exports.post_list = function (req, res, next) {
-  const excludedLang = req.headers["accept-language"] === "en" ? "fa" : "en";
+  const selectedLang = req.headers["accept-language"] === "fa" ? "fa" : "en";
   Post.find(
     { visible: true },
-    { visible: 0, [excludedLang]: 0 },
+    {
+      _id: 1,
+      postDate: 1,
+      title: `$${selectedLang}.title`,
+      subtitle: `$${selectedLang}.subtitle`,
+      content: `$${selectedLang}.content`,
+    },
     function (err, posts) {
       if (err) return next(err);
       res.send(posts);
