@@ -22,6 +22,13 @@ app.use((req, res, next) => {
 });
 app.use(express.static(root)); // Priority serve any static files
 app.use(subdomain("blog.api", blogRouter)); // Handle all requests from the blog
+app.use("/", function (req, res, next) {
+  if (req.subdomains.length === 0) {
+    console.log("hossein subdomain", req.subdomains);
+    return next();
+  }
+  next();
+});
 app.use("/api", portfolioRouter); // Handle all requests from the main site
 
 // All remaining requests return the React app, so it can handle routing.
