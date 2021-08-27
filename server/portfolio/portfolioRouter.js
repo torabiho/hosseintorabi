@@ -11,6 +11,17 @@ import express from "express";
 
 const router = express.Router();
 
+router.use("*", (req, res, next) => {
+  console.log("hossein before", req.subdomains);
+  if (req.subdomains.length > 0) {
+    console.log("hossein inside if");
+    return next();
+  }
+
+  console.log("hossein after");
+  next();
+});
+
 router.use("/educations", education);
 router.use("/bios", bio);
 router.use("/skills", skill);
