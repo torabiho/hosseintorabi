@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 app.use(express.static(root)); // Priority serve any static files
 app.use(subdomain("blog.api", blogRouter)); // Handle all requests from the blog
-app.use(subdomain("www", portfolioRouter)); // Handle all requests from the main site
+app.use("/api", portfolioRouter); // Handle all requests from the main site
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {
