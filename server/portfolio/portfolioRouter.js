@@ -11,25 +11,14 @@ import express from "express";
 
 const router = express.Router();
 
-router.use("*", (req, res, next) => {
-  console.log("hossein before", req.subdomains);
-  if (req.subdomains.length > 0) {
-    console.log("hossein inside if");
-    return next();
-  }
-
-  console.log("hossein after");
-  next();
-});
-
-router.use("/educations", education);
-router.use("/bios", bio);
-router.use("/skills", skill);
-router.use("/projects", project);
-router.use("/testimonials", testimonial);
-router.use("/works", work);
-router.use("/send-email", email);
-router.use("/portfolio", portfolio);
-router.use("/", all);
+router.use("/api/educations", education);
+router.use("/api/bios", bio);
+router.use("/api/skills", skill);
+router.use("/api/projects", project);
+router.use("/api/testimonials", testimonial);
+router.use("/api/works", work);
+router.use("/api/send-email", email);
+router.use("/api/portfolio", portfolio);
+router.use("/api/", all);
 
 module.exports = router;
