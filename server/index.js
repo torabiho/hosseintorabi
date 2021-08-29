@@ -18,13 +18,14 @@ mainRouter.use("/api", portfolioRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
 app.use(express.static(root)); // Priority serve any static files
 app.use(subdomain("blog.api", blogRouter)); // Handle all requests from the blog
 app.use(subdomain("www", mainRouter)); // Handle all requests from the main site
+app.use(cors());
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {
