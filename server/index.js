@@ -24,8 +24,8 @@ app.use(cors());
 // });
 app.use(express.static(root)); // Priority serve any static files
 app.use(subdomain("blog.api", blogRouter)); // Handle all requests from the blog
-app.use(subdomain("www", mainRouter)); // Handle all requests from the main site
-app.use(cors());
+app.use("/api", mainRouter);
+// app.use(subdomain("www", mainRouter)); // Handle all requests from the main site
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {
