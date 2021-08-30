@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
-import expressWs from "express-ws";
 import subdomain from "express-subdomain";
 import { dbConnectionInfo } from "../config.js";
 import portfolioRouter from "./portfolio/portfolioRouter";
@@ -10,8 +9,6 @@ import blogRouter from "./blog/blogRouter";
 
 const port = process.env.PORT || 50080;
 const app = express();
-const mainRouter = express.Router();
-// const ws = expressWs(app);
 const root = path.join(__dirname, "../client", "build");
 
 app.use(express.json());
