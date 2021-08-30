@@ -13,7 +13,7 @@ const root = path.join(__dirname, "../client", "build");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: true }));
+app.use(cors({ origin: "*" }));
 app.use(express.static(root)); // Priority serve any static files
 app.use(subdomain("blog.api", blogRouter)); // Handle all requests from the blog
 app.use("/api", portfolioRouter);
