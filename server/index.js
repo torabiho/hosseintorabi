@@ -1,4 +1,5 @@
 import express from "express";
+import expressWs from "express-ws";
 import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
@@ -9,6 +10,7 @@ import blogRouter from "./blog/blogRouter";
 
 const port = process.env.PORT || 50080;
 const app = express();
+const ws = expressWs(app); // required to establish WebSocket connection
 const root = path.join(__dirname, "../client", "build");
 
 app.use(express.json());
