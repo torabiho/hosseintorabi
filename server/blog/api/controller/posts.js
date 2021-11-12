@@ -7,8 +7,16 @@ const getFieldsByLanguage = (language) => {
     postDate: 1,
     title: `$title.${selectedLang}`,
     subtitle: `$subtitle.${selectedLang}`,
-    "content.media": 1,
-    [`content.${selectedLang}`]: 1,
+    content: {
+      $map: {
+        input: "$content",
+        as: "sec",
+        in: {
+          paragraph: `$$sec.${selectedLang}`,
+          media: "$$sec.media",
+        },
+      },
+    },
   };
 };
 
