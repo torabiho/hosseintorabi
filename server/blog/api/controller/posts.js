@@ -7,6 +7,7 @@ const getFieldsByLanguage = (language) => {
     postDate: 1,
     title: `$title.${selectedLang}`,
     subtitle: `$subtitle.${selectedLang}`,
+    comments: 1,
     content: {
       $map: {
         input: "$content",
