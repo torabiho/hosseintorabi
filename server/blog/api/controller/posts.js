@@ -47,8 +47,15 @@ exports.bio_add_comment = function (req, res, next) {
   try {
     const post = await Post.findOne({ _id: req.params.id });
 
-    if (req.body.comments) {
-      post.comments.push(req.body.comments);
+    const id = new mongoose.Types.ObjectId();
+
+    const newComment = {
+      id,
+      ...req.body.comment,
+    };
+
+    if (req.body.comment) {
+      post.comments.push(newComment);
     }
 
     await post.save();
