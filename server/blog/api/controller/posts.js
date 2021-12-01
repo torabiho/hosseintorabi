@@ -42,3 +42,19 @@ exports.post_details = function (req, res, next) {
     }
   );
 };
+
+exports.bio_add_comment = function (req, res, next) {
+  try {
+    const post = await Post.findOne({ _id: req.params.id });
+
+    if (req.body.comments) {
+      post.comments.push(req.body.comments);
+    }
+
+    await post.save();
+    res.send(post);
+  } catch {
+    res.status(404);
+    res.send({ error: "Post doesn't exist!" });
+  }
+};
