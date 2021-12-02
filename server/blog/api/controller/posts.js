@@ -50,11 +50,8 @@ exports.post_update = async (req, res, next) => {
 
     const secret_key = process.env.CAPTCHA_SECRET_KEY;
     const token = req.body.token;
-    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
-
-    const result = await axios.post(url);
-
-    console.log("result is", result);
+    const verifyCaptcha = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+    const result = await axios.post(verifyCaptcha);
 
     if (result.data.success && req.body.comment) {
       post.comments.push(req.body.comment);
@@ -66,6 +63,6 @@ exports.post_update = async (req, res, next) => {
     res.send(post);
   } catch (e) {
     res.status(404);
-    res.send({ error: `Post doesn't exist! ${e}` });
+    res.send({ error: e });
   }
 };
