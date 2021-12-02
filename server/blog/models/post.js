@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { string } from "prop-types";
 import { dbConnectionInfo } from "../../../config.js";
 
 const blogDB = mongoose.connection.useDb(dbConnectionInfo.dbs.blog);
@@ -17,8 +16,8 @@ const PostSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   postDate: { type: Date, required: true },
   visible: { type: Boolean, required: true },
-  title: { type: String, required: true },
-  subtitle: { type: String },
+  title: { en: { type: String }, fa: { type: String } },
+  subtitle: { en: { type: String }, fa: { type: String } },
   content: [
     {
       en: { type: String, required: true },

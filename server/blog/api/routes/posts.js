@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", posts_controller.post_list);
 
-router.patch("/:id", bio_controller.bio_add_comment);
+router.patch("/:id", posts_controller.post_update);
 
 router.get("/:id", posts_controller.post_details);
 

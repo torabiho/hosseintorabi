@@ -43,24 +43,17 @@ exports.post_details = function (req, res, next) {
   );
 };
 
-exports.bio_add_comment = function (req, res, next) {
+exports.post_update = async (req, res, next) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
 
-    const id = new mongoose.Types.ObjectId();
-
-    const newComment = {
-      id,
-      ...req.body.comment,
-    };
-
     if (req.body.comment) {
-      post.comments.push(newComment);
+      post.comments.push(req.body.comment);
     }
 
     await post.save();
     res.send(post);
-  } catch {
+  } catch (e) {
     res.status(404);
     res.send({ error: "Post doesn't exist!" });
   }
