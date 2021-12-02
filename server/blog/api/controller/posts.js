@@ -56,7 +56,7 @@ exports.post_update = async (req, res, next) => {
 
     console.log("result is", result);
 
-    if (result.success && req.body.comment) {
+    if (result.data.success && req.body.comment) {
       post.comments.push(req.body.comment);
     } else {
       throw "Captcha is not valid";
