@@ -27,7 +27,6 @@ exports.post_list = function (req, res, next) {
     getFieldsByLanguage(req.headers["accept-language"]),
     function (err, posts) {
       if (err) return next(err);
-      res.header("Access-Control-Allow-Origin", "*");
       res.send(posts);
     }
   );
@@ -39,7 +38,6 @@ exports.post_details = function (req, res, next) {
     getFieldsByLanguage(req.headers["accept-language"]),
     function (err, post) {
       if (err) return next(err);
-      res.header("Access-Control-Allow-Origin", "*");
       res.send(post);
     }
   );
@@ -54,7 +52,6 @@ exports.post_update = async (req, res, next) => {
     }
 
     await post.save();
-    res.header("Access-Control-Allow-Origin", "*");
     res.send(post);
   } catch (e) {
     res.status(404);
