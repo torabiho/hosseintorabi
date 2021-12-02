@@ -47,14 +47,24 @@ exports.post_update = async (req, res, next) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
 
-    if (req.body.comment) {
+    const secret_key = process.env.CAPTCHA_SECRET_KEY;
+    const token = req.body.token;
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+
+    const result = await axios.post(url);
+
+    console.log("result is", result);
+
+    if (result.success && req.body.comment) {
       post.comments.push(req.body.comment);
+    } else {
+      throw "Captcha is not valid";
     }
 
     await post.save();
     res.send(post);
   } catch (e) {
     res.status(404);
-    res.send({ error: "Post doesn't exist!" });
+    res.send({ error: `Post doesn't exist! ${e}` });
   }
 };
