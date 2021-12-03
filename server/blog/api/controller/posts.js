@@ -6,6 +6,7 @@ const getFieldsByLanguage = (language) => {
   return {
     _id: 1,
     postDate: 1,
+    headerImage: 1,
     title: `$title.${selectedLang}`,
     subtitle: `$subtitle.${selectedLang}`,
     comments: 1,

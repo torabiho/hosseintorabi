@@ -15,6 +15,7 @@ const commentsSchema = [
 const PostSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   postDate: { type: Date, required: true },
+  headerImage: { type: String, required: true },
   visible: { type: Boolean, required: true },
   title: { en: { type: String }, fa: { type: String } },
   subtitle: { en: { type: String }, fa: { type: String } },
