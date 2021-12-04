@@ -21,9 +21,15 @@ const PostSchema = mongoose.Schema({
   subtitle: { en: { type: String }, fa: { type: String } },
   content: [
     {
-      en: { type: String, required: true },
-      fa: { type: String, required: true },
+      en: { type: String },
+      fa: { type: String },
       media: [String],
+    },
+  ],
+  postscripts: [
+    {
+      en: { type: String },
+      fa: { type: String },
     },
   ],
   comments: commentsSchema,

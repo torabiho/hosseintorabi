@@ -20,6 +20,15 @@ const getFieldsByLanguage = (language) => {
         },
       },
     },
+    postscripts: {
+      $map: {
+        input: "$postscripts",
+        as: "sec",
+        in: {
+          postscript: `$$sec.${selectedLang}`,
+        },
+      },
+    },
   };
 };
 
