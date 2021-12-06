@@ -12,7 +12,6 @@ const getFieldsByLanguage = (language) => {
     comments: 1,
     content: {
       main: `$content.${selectedLang}`,
-      media: `$content.media`,
     },
     postscripts: {
       $map: {
