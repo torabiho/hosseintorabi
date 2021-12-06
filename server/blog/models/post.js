@@ -19,13 +19,11 @@ const PostSchema = mongoose.Schema({
   visible: { type: Boolean, required: true },
   title: { en: { type: String }, fa: { type: String } },
   subtitle: { en: { type: String }, fa: { type: String } },
-  content: [
-    {
-      en: { type: String },
-      fa: { type: String },
-      media: [String],
-    },
-  ],
+  content: {
+    en: { type: String },
+    fa: { type: String },
+    media: [String],
+  },
   postscripts: [
     {
       en: { type: String },

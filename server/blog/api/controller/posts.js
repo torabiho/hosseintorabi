@@ -11,14 +11,8 @@ const getFieldsByLanguage = (language) => {
     subtitle: `$subtitle.${selectedLang}`,
     comments: 1,
     content: {
-      $map: {
-        input: "$content",
-        as: "sec",
-        in: {
-          paragraph: `$$sec.${selectedLang}`,
-          media: "$$sec.media",
-        },
-      },
+      main: `$content.${selectedLang}`,
+      media: `$content.media`,
     },
     postscripts: {
       $map: {
