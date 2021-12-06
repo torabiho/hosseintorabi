@@ -22,7 +22,7 @@ const PostSchema = mongoose.Schema({
   content: {
     en: { type: String },
     fa: { type: String },
-    media: [String],
+    media: [[String]],
   },
   postscripts: [
     {
