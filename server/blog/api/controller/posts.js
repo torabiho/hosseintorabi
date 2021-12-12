@@ -31,7 +31,7 @@ exports.post_list = function (req, res, next) {
   Post.find(
     {
       visible: true,
-      ...(req.params.category && { categories: req.params.category }),
+      ...req.query,
     },
     getFieldsByLanguage(req.headers["accept-language"]),
     function (err, posts) {
