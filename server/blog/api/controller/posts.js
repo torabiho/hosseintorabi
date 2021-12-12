@@ -29,7 +29,10 @@ const getFieldsByLanguage = (language) => {
 
 exports.post_list = function (req, res, next) {
   Post.find(
-    { visible: true },
+    {
+      visible: true,
+      ...(req.params.category && { categories: req.params.category }),
+    },
     getFieldsByLanguage(req.headers["accept-language"]),
     function (err, posts) {
       if (err) return next(err);

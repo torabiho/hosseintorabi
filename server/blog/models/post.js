@@ -30,6 +30,11 @@ const PostSchema = mongoose.Schema({
     },
   ],
   comments: commentsSchema,
+  categories: [
+    {
+      type: String,
+    },
+  ],
 });
 
 export default blogDB.model("Post", PostSchema);
