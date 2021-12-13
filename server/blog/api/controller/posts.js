@@ -11,6 +11,7 @@ const getFieldsByLanguage = (language) => {
     subtitle: `$subtitle.${selectedLang}`,
     comments: 1,
     content: `$content.${selectedLang}`,
+    mediaDescription: `$mediaDescription.${selectedLang}`,
     postscriptsList: {
       $filter: {
         input: {
