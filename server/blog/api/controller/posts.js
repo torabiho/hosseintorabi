@@ -12,19 +12,7 @@ const getFieldsByLanguage = (language) => {
     comments: 1,
     content: `$content.${selectedLang}`,
     mediaDescription: `$mediaDescription.${selectedLang}`,
-    postscriptsList: {
-      $filter: {
-        input: {
-          $map: {
-            input: "$postscripts",
-            as: "el",
-            in: `$$el.${selectedLang}`,
-          },
-        },
-        as: "postscript",
-        cond: { $ne: [`$$postscript`, undefined] },
-      },
-    },
+    postscripts: `$postscripts.${selectedLang}`,
   };
 };
 

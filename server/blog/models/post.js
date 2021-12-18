@@ -23,12 +23,10 @@ const PostSchema = mongoose.Schema({
     en: { type: String },
     fa: { type: String },
   },
-  postscripts: [
-    {
-      en: { type: String },
-      fa: { type: String },
-    },
-  ],
+  postscripts: {
+    en: [{ type: String }],
+    fa: [{ type: String }],
+  },
   comments: commentsSchema,
   categories: [
     {
