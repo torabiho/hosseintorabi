@@ -13,6 +13,7 @@ const getFieldsByLanguage = (language) => {
     content: `$content.${selectedLang}`,
     mediaDescription: `$mediaDescription.${selectedLang}`,
     postscripts: `$postscripts.${selectedLang}`,
+    link: `$link.${selectedLang}`,
   };
 };
 

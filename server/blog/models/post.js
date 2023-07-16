@@ -37,6 +37,10 @@ const PostSchema = mongoose.Schema({
     en: { type: mongoose.Schema.Types.Mixed },
     fa: { type: mongoose.Schema.Types.Mixed },
   },
+  link: {
+    en: { type: String },
+    fa: { type: String },
+  },
 });
 
 export default blogDB.model("Post", PostSchema);
