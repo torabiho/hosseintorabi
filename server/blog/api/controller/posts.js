@@ -46,15 +46,21 @@ exports.post_update = async (req, res, next) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
 
-    const secret_key = process.env.CAPTCHA_SECRET_KEY;
-    const token = req.body.token;
-    const verifyCaptcha = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
-    const result = await axios.post(verifyCaptcha);
+    if (req.body.content) {
+      post.content[req.headers["accept-language"]] = req.body.content;
+    }
 
-    if (result.data.success && req.body.comment) {
-      post.comments.push(req.body.comment);
-    } else {
-      throw "Captcha is not valid";
+    if (req.body.comment) {
+      const secret_key = process.env.CAPTCHA_SECRET_KEY;
+      const token = req.body.token;
+      const verifyCaptcha = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+      const result = await axios.post(verifyCaptcha);
+
+      if (result.data.success) {
+        post.comments.push(req.body.comment);
+      } else {
+        throw "Captcha is not valid";
+      }
     }
 
     await post.save();
