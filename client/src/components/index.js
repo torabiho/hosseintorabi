@@ -10,3 +10,4 @@ export * from "./Resume";
 export * from "./Skills";
 export * from "./Testimonials";
 export * from "./WorkExperience";
+export * from "./ThirdPartyFacade";

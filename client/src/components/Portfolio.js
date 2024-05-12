@@ -1,19 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { compareValues } from "../utilities/helpers";
+import { ThirdPartyFacade } from "./ThirdPartyFacade";
 import "./Portfolio.scss";
 
 const renderMedia = (project) => {
   if (project.videoLink) {
     return (
-      <iframe
+      <ThirdPartyFacade
         title={project.title}
-        style={{ minHeight: "227px" }}
-        src={project.videoLink}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
+        url={project.videoLink}
+        customStyle={{ minHeight: "227px" }}
+      />
     );
   } else {
     const projectImage = "images/portfolio/thumbnails/" + project.image;
