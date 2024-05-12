@@ -1,212 +1,184 @@
-import React, { Component } from "react";
+import React, { useState, useCallback } from "react";
 import "./Contact.scss";
 import { sendEmail } from "../apiResources/endpoints";
 import { isEmailValid } from "../utilities/helpers";
 
 const sendingStatus = {
-	ERROR: "error",
-	SENDING: "sending",
-	SENT: "sent",
+  ERROR: "error",
+  SENDING: "sending",
+  SENT: "sent",
 };
 
-class Contact extends Component {
-	constructor(props) {
-		super(props);
-		this.responseRef = React.createRef();
-		this.state = {
-			name: "",
-			message: "",
-			subject: "",
-			email: "",
-			status: "",
-			response: false,
-		};
-	}
+export const Contact = (props) => {
+  const [fields, setFields] = useState({
+    name: "",
+    message: "",
+    subject: "",
+    email: "",
+    status: "",
+  });
+  const [response, setResponse] = useState(false);
 
-	handleChange = (e) => {
-		const fieldName = e.currentTarget.getAttribute("name");
-		this.setState({ [fieldName]: e.target.value, response: false });
-	};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFields((prevFields) => ({
+      ...prevFields,
+      [name]: value,
+      response: false,
+    }));
+  };
 
-	handleRequiredFields = (fieldName) => {
-		if (
-			this.state.status === sendingStatus.ERROR &&
-			this.state[fieldName].length === 0
-		) {
-			return <span className="error"> * Required</span>;
-		}
+  const handleRequiredFields = useCallback(
+    (fieldName) => {
+      if (
+        fields.status === sendingStatus.ERROR &&
+        fields[fieldName].length === 0
+      ) {
+        return <span className="error"> * Required</span>;
+      }
+      return <span className="required"> *</span>;
+    },
+    [fields]
+  );
 
-		return <span className="required"> *</span>;
-	};
+  const allRequiredFieldsCompleted = useCallback(() => {
+    const { name, email, message } = fields;
+    return name.length > 0 && email.length > 0 && message.length > 0;
+  }, [fields]);
 
-	allRequiredFieldsCompleted = () => {
-		const { name, email, message } = this.state;
-		return name.length > 0 && email.length > 0 && message.length > 0;
-	};
+  const getErrorMessage = useCallback(() => {
+    let errorMessage = "";
+    if (!allRequiredFieldsCompleted()) {
+      errorMessage = "Please fill out all required fields and try again";
+    } else if (!isEmailValid(fields.email)) {
+      errorMessage = "Please enter a valid email address";
+    } else {
+      errorMessage = "Sorry, message was not sent, please try again";
+    }
 
-	getErrorMessage = () => {
-		let errorMessage = "";
-		if (!this.allRequiredFieldsCompleted()) {
-			errorMessage = "Please fill out all required fields and try again";
-		} else if (!isEmailValid(this.state.email)) {
-			errorMessage = "Please enter a valid email address";
-		} else {
-			errorMessage = "Sorry, message was not sent, please try again";
-		}
+    return <div id="message-warning">{errorMessage}</div>;
+  }, [fields, allRequiredFieldsCompleted]);
 
-		return <div id="message-warning">{errorMessage}</div>;
-	};
+  const getSuccessResponse = useCallback(
+    () => (
+      <div id="message-success">
+        <i className="fa fa-check"></i>Your message was sent, thank you!
+      </div>
+    ),
+    []
+  );
 
-	getSuccessResponse = () => (
-		<div id="message-success">
-			<i className="fa fa-check"></i>Your message was sent, thank you!
-		</div>
-	);
+  const renderSubmitResponse = useCallback(() => {
+    switch (fields.status) {
+      case sendingStatus.ERROR:
+        return getErrorMessage();
+      case sendingStatus.SENT:
+        return getSuccessEngineResponse();
+      default:
+        break;
+    }
+  }, [fields.status, getErrorMessage, getSuccessResponse]);
 
-	renderSubmitResponse = () => {
-		const { status } = this.state;
-		switch (status) {
-			case sendingStatus.ERROR:
-				return this.getErrorMessage();
-			case sendingStatus.SENT:
-				return this.getSuccessResponse();
-			default:
-				break;
-		}
-	};
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    setFields((fields) => ({ ...fields, status: sendingStatus.SENDING }));
+    setResponse(true);
 
-	formSubmit = async (e) => {
-		e.preventDefault();
-		this.setState({
-			status: sendingStatus.SENDING,
-			response: true,
-		});
+    const { name, email, subject, message } = fields;
 
-		const { name, email, subject, message } = this.state;
+    if (allRequiredFieldsCompleted() && isEmailValid(email)) {
+      try {
+        const data = { name, email, subject, message };
+        await sendEmail(data);
+        setFields({
+          name: "",
+          message: "",
+          subject: "",
+          email: "",
+          status: sendingStatus.SENT,
+        });
+      } catch (error) {
+        setFields((fields) => ({ ...fields, status: sendingStatus.ERROR }));
+      }
+    } else {
+      setFields((fields) => ({ ...fields, status: sendingStatus.ERROR }));
+    }
+  };
 
-		if (this.allRequiredFieldsCompleted() && isEmailValid(email)) {
-			try {
-				const data = { name, email, subject, message };
-				await sendEmail(data);
-				this.setState({ status: sendingStatus.SENT }, this.resetForm());
-			} catch (error) {
-				this.setState({ status: sendingStatus.ERROR });
-			}
-		} else {
-			this.setState({
-				status: sendingStatus.ERROR,
-			});
-		}
-	};
+  const renderInputField = useCallback(
+    (name, id, isRequired) => {
+      const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+      return (
+        <div>
+          <label htmlFor={id}>
+            {displayName}
+            {isRequired && handleRequiredFields(name)}
+          </label>
+          <input
+            type="text"
+            size="35"
+            id={id}
+            name={name}
+            onChange={handleChange}
+            value={fields[name]}
+          />
+        </div>
+      );
+    },
+    [fields, handleChange, handleRequiredFields]
+  );
 
-	resetForm = () => {
-		this.setState({
-			name: "",
-			message: "",
-			subject: "",
-			email: "",
-			status: "",
-		});
-	};
+  const { data } = props;
+  return (
+    <section id="contact">
+      <div className="row section-head">
+        <div className="three columns section-head__title">
+          <h1>
+            <span>Contact Me</span>
+          </h1>
+        </div>
+        <div className="nine columns section-head__description">
+          <p className="lead">{data && data[0].contactmessage}</p>
+        </div>
+      </div>
 
-	renderInputField = (name, id, isRequired) => {
-		const displayName = name.charAt(0).toUpperCase() + name.slice(1);
-		return (
-			<div>
-				<label htmlFor={id}>
-					{displayName}
-					{isRequired && this.handleRequiredFields(name)}
-				</label>
-				<input
-					type="text"
-					size="35"
-					id={id}
-					name={name}
-					onChange={this.handleChange}
-					value={this.state[name]}
-				/>
-			</div>
-		);
-	};
-
-	render() {
-		const { message, status, response } = this.state;
-		const { data } = this.props;
-		return (
-			<section id="contact">
-				<div className="row section-head">
-					<div className="three columns section-head__title">
-						<h1>
-							<span>Contact Me</span>
-						</h1>
-					</div>
-					<div className="nine columns section-head__description">
-						<p className="lead">{data && data[0].contactmessage}</p>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="twelve columns">
-						<form
-							id="contactForm"
-							name="contactForm"
-							onSubmit={this.formSubmit}
-						>
-							<fieldset>
-								{this.renderInputField(
-									"name",
-									"contactName",
-									true
-								)}
-								{this.renderInputField(
-									"email",
-									"contactEmail",
-									true
-								)}
-								{this.renderInputField(
-									"subject",
-									"contactSubject",
-									false
-								)}
-								<div>
-									<label htmlFor="contactMessage">
-										Message
-										{this.handleRequiredFields("message")}
-									</label>
-									<textarea
-										cols="50"
-										rows="8"
-										id="contactMessage"
-										name="message"
-										onChange={this.handleChange}
-										value={message}
-									></textarea>
-								</div>
-								<div className="submit-wrapper">
-									<button
-										className="submit"
-										disabled={
-											status === sendingStatus.SENDING
-										}
-									>
-										Send
-									</button>
-									{status === sendingStatus.SENDING && (
-										<img
-											id="image-loader"
-											alt="loader"
-											src="images/loader.gif"
-										/>
-									)}
-								</div>
-							</fieldset>
-						</form>
-						{response && this.renderSubmitResponse()}
-					</div>
-				</div>
-			</section>
-		);
-	}
-}
-
-export default Contact;
+      <div className="row">
+        <div className="twelve columns">
+          <form id="contactForm" name="contactForm" onSubmit={formSubmit}>
+            <fieldset>
+              {renderInputField("name", "contactName", true)}
+              {renderInputField("email", "contactEmail", true)}
+              {renderInputField("subject", "contactSubject", false)}
+              <div>
+                <label htmlFor="contactMessage">
+                  Message
+                  {handleRequiredFields("message")}
+                </label>
+                <textarea
+                  cols="50"
+                  rows="8"
+                  id="contactMessage"
+                  name="message"
+                  onChange={handleChange}
+                  value={fields.message}
+                ></textarea>
+              </div>
+              <div className="submit-wrapper">
+                <button
+                  className="submit"
+                  disabled={fields.status === sendingStatus.SENDING}
+                >
+                  Send
+                </button>
+                {fields.status === sendingStatus.SENDING && (
+                  <img id="image-loader" alt="loader" src="images/loader.gif" />
+                )}
+              </div>
+            </fieldset>
+          </form>
+          {response && renderSubmitResponse()}
+        </div>
+      </div>
+    </section>
+  );
+};
