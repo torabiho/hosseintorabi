@@ -18,28 +18,20 @@ const getFieldsByLanguage = (language) => {
 };
 
 exports.post_list = function (req, res, next) {
-  Post.find(
-    {
-      visible: true,
-      ...req.query,
-    },
-    getFieldsByLanguage(req.headers["accept-language"]),
-    function (err, posts) {
-      if (err) return next(err);
-      res.send(posts);
-    }
-  );
+  Post.find({
+    visible: true,
+    ...req.query,
+  })
+    .select(getFieldsByLanguage(req.headers["accept-language"]))
+    .then((posts) => res.send(posts))
+    .catch((err) => next(err));
 };
 
 exports.post_details = function (req, res, next) {
-  Post.findById(
-    req.params.id,
-    getFieldsByLanguage(req.headers["accept-language"]),
-    function (err, post) {
-      if (err) return next(err);
-      res.send(post);
-    }
-  );
+  Post.findById(req.params.id)
+    .select(getFieldsByLanguage(req.headers["accept-language"]))
+    .then((post) => res.send(post))
+    .catch((err) => next(err));
 };
 
 exports.post_update = async (req, res, next) => {
